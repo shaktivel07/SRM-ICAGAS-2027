@@ -39,7 +39,6 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 1.5rem; height: 4.5rem;
     }
-    /* FIX: navbar logo area with logo image */
     .nav-logo {
       font-family: var(--font-head); font-size: 1.1rem; font-weight: 700;
       color: var(--navy); line-height: 1.2;
@@ -79,7 +78,6 @@
 
     /* ─── HERO / BANNER ─── */
     #home { margin-top: 4.5rem; }
-    /* FIX: sync hero margin with navbar height change at 768px */
     @media (min-width: 768px) { #home { margin-top: 5rem; } }
 
     .hero-section {
@@ -114,7 +112,6 @@
       content: ''; flex: 1; max-width: 80px; height: 1.5px; background: rgba(255,255,255,.5);
     }
 
-    /* ADDED: sponsor/logo strip inside hero */
     .hero-logos {
       display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
       gap: 1.25rem; margin-bottom: 1.5rem; padding: .75rem 1rem;
@@ -155,7 +152,6 @@
     .about-grid { display: flex; flex-direction: column; gap: 2rem; align-items: flex-start; }
     .about-text { font-size: .95rem; line-height: 1.85; list-style: disc; padding-left: 1.25rem; }
     .about-text li + li { margin-top: .75rem; }
-    /* FIX: about-read-more moved outside <ul> in HTML */
     .about-read-more {
       display: inline-block; margin-top: 1.25rem;
       background: var(--yellow); color: var(--navy); font-weight: 600;
@@ -175,19 +171,63 @@
     .org-band hr { width: 80px; border-top: 3px solid rgba(255,255,255,.7); margin: .25rem auto; }
     .org-band p { font-size: .95rem; line-height: 1.7; }
 
-    /* ADDED: college photo gallery strip */
-    .campus-gallery {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem;
-      padding: 1.5rem; background: #000;
+    /* ─── ANIMATED CAMPUS PHOTO GALLERY ─── */
+    .campus-gallery-wrapper {
+      width: 100%;
+      background: #000;
+      overflow: hidden;
+      padding: 2.5rem 0;
+      position: relative;
     }
-    .campus-gallery img {
-      width: 100%; height: 180px; object-fit: cover;
-      transition: transform .3s, filter .3s;
-      filter: brightness(.9);
+    .campus-gallery-wrapper::before,
+    .campus-gallery-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 120px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
     }
-    .campus-gallery img:hover { transform: scale(1.03); filter: brightness(1); }
-    .campus-gallery img:first-child {
-      grid-column: span 2; height: 260px;
+    .campus-gallery-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.9), transparent);
+    }
+    .campus-gallery-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(0,0,0,0.9), transparent);
+    }
+    .campus-gallery-track {
+      display: flex;
+      width: max-content;
+      gap: 1.25rem;
+      animation: infiniteScroll 30s linear infinite;
+    }
+    .campus-gallery-wrapper:hover .campus-gallery-track {
+      animation-play-state: paused;
+    }
+    .campus-gallery-track img {
+      width: 320px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.3s ease, box-shadow 0.3s ease;
+      filter: brightness(0.8);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+    .campus-gallery-track img:hover {
+      transform: scale(1.06) translateY(-4px);
+      filter: brightness(1);
+      box-shadow: 0 12px 25px rgba(255, 197, 58, 0.3);
+    }
+    @keyframes infiniteScroll {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(calc(-5 * 320px - 5 * 1.25rem), 0, 0);
+      }
     }
 
     /* ─── KEY DATES ─── */
@@ -201,7 +241,6 @@
 
     /* ─── CALL FOR PAPERS ─── */
     .cfp-grid { display: flex; flex-direction: column; gap: 2rem; }
-    .track-card { }
     .track-title { color: var(--blue9); font-weight: 600; font-size: 1.05rem; margin-bottom: .75rem; }
     .track-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
     .track-list li { display: flex; align-items: flex-start; gap: .5rem; font-size: .9rem; }
@@ -264,7 +303,6 @@
     .contact-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .1rem; }
     .contact-card a { color: #fff; }
     .map-wrap { width: 100%; max-width: 600px; border-radius: 8px; overflow: hidden; }
-    /* FIX: ensure iframe fills its container */
     .map-wrap iframe { display: block; width: 100%; border: 0; }
 
     /* ─── FOOTER ─── */
@@ -289,7 +327,6 @@
     .footer-copy { padding: .75rem 1rem; font-size: .8rem; text-align: center; color: rgba(255,255,255,.7); }
     .footer-copy a { font-weight: 600; color: #fff; }
 
-    /* ADDED: footer logo strip */
     .footer-logos {
       display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
       gap: 1.5rem; padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); width: 100%;
@@ -333,6 +370,65 @@
     .about-vision-item { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: .75rem; font-size: .93rem; line-height: 1.7; }
     .tick-icon { color: var(--blue9); font-size: 1.3rem; flex-shrink: 0; line-height: 1.2; }
 
+    /* ─── TRAVEL GUIDE PAGE STYLING (NEW CONTENT) ─── */
+    .travel-hero-overlay {
+      position: relative; min-height: 38vh; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(112deg, rgba(10, 7, 95, 0.95) 20%, rgba(242, 41, 91, 0.9) 100%);
+    }
+    .travel-intro-grid {
+      display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem;
+    }
+    .travel-intro-card {
+      background: #ffffff; border-radius: 12px; padding: 2rem;
+      border: 1px solid var(--gray-200); box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .travel-intro-card h3 {
+      font-family: var(--font-head); font-size: 1.25rem; font-weight: 700;
+      color: var(--blue9); display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem;
+    }
+    .travel-intro-card p {
+      font-size: .95rem; line-height: 1.8; color: var(--gray-600);
+    }
+    .travel-places-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+    }
+    .travel-item-card-no-pic {
+      background: #ffffff; border-radius: 12px; padding: 1.5rem;
+      border: 1px solid var(--gray-200); display: flex; flex-direction: column;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      position: relative; overflow: hidden;
+    }
+    .travel-item-card-no-pic:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(10, 7, 95, 0.08);
+    }
+    .travel-card-badge {
+      align-self: flex-start; font-size: .7rem; font-weight: 700;
+      text-transform: uppercase; padding: .25rem .75rem; border-radius: 99px;
+      letter-spacing: .05em; margin-bottom: 0.75rem;
+    }
+    /* Theme color definitions for dynamic typography card borders */
+    .theme-gold { border-top: 4px solid var(--yellow); }
+    .theme-gold .travel-card-badge { background: rgba(255,197,58,0.15); color: #b28511; }
+    .theme-blue { border-top: 4px solid var(--blue9); }
+    .theme-blue .travel-card-badge { background: rgba(30,58,138,0.1); color: var(--blue9); }
+    .theme-green { border-top: 4px solid #10b981; }
+    .theme-green .travel-card-badge { background: rgba(16,185,129,0.1); color: #065f46; }
+    .theme-pink { border-top: 4px solid var(--pink); }
+    .theme-pink .travel-card-badge { background: rgba(242,41,91,0.1); color: var(--pink); }
+    .theme-purple { border-top: 4px solid #8b5cf6; }
+    .theme-purple .travel-card-badge { background: rgba(139,92,246,0.1); color: #5b21b6; }
+
+    .travel-item-card-no-pic h4 {
+      font-family: var(--font-head); font-size: 1.1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: .5rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .travel-item-card-no-pic p {
+      font-size: .88rem; line-height: 1.6; color: var(--gray-600);
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (min-width: 768px) {
       #navbar { padding: 0 1.5rem; height: 5rem; }
@@ -347,8 +443,10 @@
       .editors-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
       .about-detail-img { height: 50vh; }
       .about-detail-content { padding: 3rem 5rem; }
-      .campus-gallery { grid-template-columns: repeat(3, 1fr); }
-      .campus-gallery img:first-child { grid-column: span 3; }
+
+      /* Travel page responsive rules */
+      .travel-intro-grid { grid-template-columns: repeat(2, 1fr); }
+      .travel-places-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 767px) {
       .nav-links { display: none; }
@@ -356,13 +454,13 @@
     }
     @media (min-width: 1024px) {
       .board-grid { grid-template-columns: repeat(3, 1fr); }
+      .travel-places-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     /* ─── SMOOTH REVEAL ─── */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .5s; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ─── CFP GRID at wider screens ─── */
     @media (min-width: 768px) {
       .cfp-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
     }
@@ -375,21 +473,19 @@
 
 <!-- ═══ NAVBAR ═══ -->
 <nav id="navbar">
-  <!-- ADDED: logo image + text -->
   <a class="nav-logo" href="#" onclick="showPage('home')">
     <img class="nav-logo-img" src="logo.png" alt="SRM IST Logo" onerror="this.style.display='none'" />
     <div class="nav-logo-text">
-      
       ICAGAS 2027
       <span>SRM IST Tiruchirappalli</span>
     </div>
   </a>
   <div class="nav-links">
-    <!-- FIX: href="#" to avoid scroll-jump in SPA page-switch layout -->
     <a href="#" onclick="showPage('home')"         class="active" data-page="home">Home</a>
     <a href="#" onclick="showPage('about-page')"   data-page="about-page">About</a>
     <a href="#" onclick="showPage('registration')" data-page="registration">Registration</a>
     <a href="#" onclick="showPage('advisory')"     data-page="advisory">Advisory Board</a>
+    <a href="#" onclick="showPage('travel-guide')" data-page="travel-guide">Travel Guide</a>
     <a href="#" onclick="showPage('reach-us')"     data-page="reach-us">Reach Us</a>
   </div>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -403,6 +499,7 @@
   <a href="#" onclick="showPage('about-page');closeMenu()"   data-page="about-page">About</a>
   <a href="#" onclick="showPage('registration');closeMenu()" data-page="registration">Registration</a>
   <a href="#" onclick="showPage('advisory');closeMenu()"     data-page="advisory">Advisory Board</a>
+  <a href="#" onclick="showPage('travel-guide');closeMenu()" data-page="travel-guide">Travel Guide</a>
   <a href="#" onclick="showPage('reach-us');closeMenu()"     data-page="reach-us">Reach Us</a>
 </div>
 
@@ -422,10 +519,6 @@
       <h2>for Advanced Engineering Informatics and Autonomous Systems</h2>
       <div class="hero-divider">ICAGAS 2027</div>
 
-      <!-- ADDED: Sponsor / partner logos strip in hero -->
-      <!-- Replace pic_1.png–pic_3.png with your actual logo files -->
-    
-
       <div class="hero-meta">
         <div class="hero-meta-item">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -436,7 +529,6 @@
           SRM IST, Tiruchirappalli &nbsp;·&nbsp; Hybrid Mode
         </div>
       </div>
-      <!-- FIX: use button/span instead of bare <a> for JS-only navigation -->
       <span class="hero-btn" onclick="showPage('registration')">
         Register
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -450,7 +542,6 @@
       <h2 class="section-title">ABOUT THE <span>CONFERENCE</span></h2>
       <div class="about-grid reveal">
         <div>
-          <!-- FIX: <a> was incorrectly placed as direct child of <ul>; moved outside -->
           <ul class="about-text">
             <li>ICAGAS 2027 is a premier international forum dedicated to advancing research at the intersection of Agentic AI, Generative AI, Engineering Informatics, and Autonomous Systems — organized by the Dept. of CSE, SRMIST Tiruchirappalli.</li>
             <li>The conference brings together leading academicians, researchers, industry professionals, policymakers, and technology innovators to exchange ideas, present cutting-edge findings, and discuss emerging challenges in intelligent autonomous systems.</li>
@@ -479,14 +570,23 @@
     </div>
   </div>
 
-  <!-- ADDED: Campus / College Photo Gallery -->
-  <!-- Replace pic_1.png to pic_6.png with your actual college photos -->
-  <div class="campus-gallery">
-    <img src="pic_4.png" alt="SRM IST Tiruchirappalli Campus – Main Building" loading="lazy" />
-    <img src="pic_5.png" alt="SRM IST Campus – Department Block" loading="lazy" />
-    <img src="pic_6.png" alt="SRM IST Campus – Auditorium / Conference Hall" loading="lazy" />
-    <img src="pic_2.png" alt="SRM IST Campus – Library" loading="lazy" />
-    <img src="pic_3.png" alt="SRM IST Campus – Labs" loading="lazy" />
+  <!-- UPGRADED: Dynamic Infinite Smooth-Scrolling Campus Gallery -->
+  <div class="campus-gallery-wrapper">
+    <div class="campus-gallery-track">
+      <!-- Original Set -->
+      <img src="pic_4.png" alt="SRM IST Tiruchirappalli Campus – Main Building" loading="lazy" onerror="this.src='https://placehold.co/600x400/0A075F/ffffff?text=SRM+Trichy+Campus'" />
+      <img src="pic_5.png" alt="SRM IST Campus – Department Block" loading="lazy" onerror="this.src='https://placehold.co/600x400/002160/ffffff?text=SRM+Department+Block'" />
+      <img src="pic_6.png" alt="SRM IST Campus – Auditorium / Conference Hall" loading="lazy" onerror="this.src='https://placehold.co/600x400/f2295b/ffffff?text=SRM+Conference+Hall'" />
+      <img src="pic_2.png" alt="SRM IST Campus – Library" loading="lazy" onerror="this.src='https://placehold.co/600x400/db2777/ffffff?text=SRM+Library'" />
+      <img src="pic_3.png" alt="SRM IST Campus – Labs" loading="lazy" onerror="this.src='https://placehold.co/600x400/FFC53A/0A075F?text=SRM+Research+Labs'" />
+      
+      <!-- Duplicate Set for Seamless Infinite Loop -->
+      <img src="pic_4.png" alt="SRM IST Tiruchirappalli Campus – Main Building" aria-hidden="true" onerror="this.src='https://placehold.co/600x400/0A075F/ffffff?text=SRM+Trichy+Campus'" />
+      <img src="pic_5.png" alt="SRM IST Campus – Department Block" aria-hidden="true" onerror="this.src='https://placehold.co/600x400/002160/ffffff?text=SRM+Department+Block'" />
+      <img src="pic_6.png" alt="SRM IST Campus – Auditorium / Conference Hall" aria-hidden="true" onerror="this.src='https://placehold.co/600x400/f2295b/ffffff?text=SRM+Conference+Hall'" />
+      <img src="pic_2.png" alt="SRM IST Campus – Library" aria-hidden="true" onerror="this.src='https://placehold.co/600x400/db2777/ffffff?text=SRM+Library'" />
+      <img src="pic_3.png" alt="SRM IST Campus – Labs" aria-hidden="true" onerror="this.src='https://placehold.co/600x400/FFC53A/0A075F?text=SRM+Research+Labs'" />
+    </div>
   </div>
 
   <!-- KEY DATES -->
@@ -695,12 +795,10 @@
 <!-- ═══════════════════════════════════════════ -->
 <div id="about-page" class="page-section">
   <div style="height:4.5rem;"></div>
-  <!-- ADDED: Hero banner image for About page -->
-  <!-- pic_4.png or pic_5.png recommended as the campus hero shot -->
   <div style="position:relative; min-height:35vh; overflow:hidden;">
     <img src="pic_4.png" alt="SRM IST Tiruchirappalli Campus"
          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.45);"
-         onerror="this.style.display='none'" />
+         onerror="this.src='https://placehold.co/1200x600/0A075F/ffffff?text=SRM+IST+Tiruchirappalli+Campus'" />
     <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:35vh;
                 background:linear-gradient(112deg,rgba(0,33,96,.75) 28%,rgba(242,41,91,.6) 100%);">
       <div style="text-align:center; color:#fff; padding:2rem 1.5rem;">
@@ -719,11 +817,9 @@
     <h2>About SRM IST Tiruchirappalli</h2>
     <p>One of the best universities in India, SRM Institute of Science and Technology (NIRF ranking 18 under the university category, NAAC A++ grade) offers a wide range of undergraduate, graduate, and doctorate programmes in six faculties: Engineering &amp; Technology, Management, Medicine &amp; Health Sciences, Science &amp; Humanities, Law, and Agricultural Sciences. Its campuses are located in and around Chennai, Tiruchirappalli (TN), Modinagar (UP), Sonepat (Haryana), Amaravati (AP), and Gangtok (Sikkim).</p>
 
-    <!-- ADDED: inline campus photo inside About page -->
-    <!-- Use pic_5.png or pic_6.png for a campus/department photo here -->
     <img src="pic_5.png" alt="SRM IST Tiruchirappalli Department of CSE"
          style="width:100%;max-height:320px;object-fit:cover;border-radius:8px;margin:1.5rem 0;"
-         onerror="this.style.display='none'" />
+         onerror="this.src='https://placehold.co/1200x400/002160/ffffff?text=Department+of+CSE'" />
 
     <h2>About the Department of CSE</h2>
     <p>The Department of Computer Science and Engineering at SRM Institute of Science and Technology, Trichy was established in 2021 with the aim of giving standard education to students and helping them reach their full potential. The department provides top-notch IT infrastructure, a world-class environment for learning and research, collaborations with industry leaders, and promotes moral and ethical values.</p>
@@ -776,7 +872,6 @@
       <p>While preparing your manuscript, we recommend using the Springer LNCS/LNAI template. Short papers: 6–11 pages. Long papers: 12–15 pages (approximately 400 words per page).</p>
 
       <h3>Review Process</h3>
-      <!-- FIX: was <ol> with <li> using .reg-tick span, but styled as ordered list — keeping consistent -->
       <ul class="reg-guidelines">
         <li><span class="reg-tick">✓</span>All submitted manuscripts will undergo a rigorous full-paper double-blind peer-review process.</li>
         <li><span class="reg-tick">✓</span>Screened submissions undergo an initial quality check through plagiarism detection software (similarity index must be below 5%).</li>
@@ -889,7 +984,6 @@
 
       <h2 class="section-title" style="margin-top:3rem;">INTERNATIONAL <span>ADVISORY BOARD</span></h2>
 
-      <!-- FIX: pass btn element to switchTab to avoid relying on global event object -->
       <div class="tab-bar">
         <button class="tab-btn active" onclick="switchTab(this,'intl')">International Board</button>
         <button class="tab-btn" onclick="switchTab(this,'national')">National Board</button>
@@ -929,54 +1023,201 @@
 
 
 <!-- ═══════════════════════════════════════════ -->
-<!--  PAGE: REACH US                             -->
+<!--  PAGE: TRAVEL GUIDE (NEW PAGE)             -->
 <!-- ═══════════════════════════════════════════ -->
-<div id="reach-us" class="page-section">
+<div id="travel-guide" class="page-section">
   <div style="height:4.5rem;"></div>
-  <div class="contact-wrap">
-    <div class="contact-card reveal">
-      <h2>Contact Information</h2>
-      <div class="contact-item">
-        <span class="contact-icon">👤</span>
-        <div>Dr. S. Kanaga Suba Raja<br /><small>General Chair, ICAGAS 2027</small></div>
-      </div>
-      <div class="contact-item">
-        <span class="contact-icon">📞</span>
-        <div><a href="tel:+919486684400">+91 94866 84400</a></div>
-      </div>
-      <div class="contact-item">
-        <span class="contact-icon">✉️</span>
-        <div><a href="mailto:hod.cse.try.et@srmist.edu.in">hod.cse.try.et@srmist.edu.in</a></div>
-      </div>
-      <div class="contact-item">
-        <span class="contact-icon">📍</span>
-        <div>
-          SRM Institute of Science and Technology<br />
-          Tiruchirappalli Campus<br />
-          Irungalur, Near Samayapuram Toll Plaza<br />
-          Tiruchirappalli – 621105, Tamil Nadu, India
-        </div>
-      </div>
-    </div>
-    <div class="map-wrap">
-      <!-- FIX: added width="100%" attribute to iframe; previously relied on CSS only -->
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.105612194349!2d78.75247028636714!3d10.955394326050465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baafb9b231ae861%3A0xe015b4e7a6e2c2d6!2sSRM%20Institute%20of%20Science%20%26%20Technology%2C%20Tiruchirapalli%20Campus!5e0!3m2!1sen!2sin!4v1710017362297!5m2!1sen!2sin"
-        width="100%"
-        height="450"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
+  
+  <div class="travel-hero-overlay">
+    <div style="text-align:center; color:#fff; padding:2.5rem 1.5rem; max-width:800px; z-index:5;">
+      <span style="display:inline-block; background:rgba(255,197,58,0.2); border:1px solid var(--yellow); border-radius:99px; padding:0.25rem 1rem; font-size:0.75rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.75rem; color:var(--yellow);">
+        Conference Destination
+      </span>
+      <h1 style="font-size:clamp(1.5rem, 5vw, 2.5rem); font-weight:700; font-family:var(--font-head);">Explore Tiruchirappalli</h1>
+      <p style="margin-top:.75rem; font-size:1rem; opacity:.9;">
+        A comprehensive overview of Tiruchirappalli's historical heritage, scenic spots, architectural wonders, and cultural backdrop for incoming delegates.
+      </p>
     </div>
   </div>
+
+  <section class="section">
+    <div class="section-wide">
+      
+      <!-- Historic & Geographic Introduction Grid -->
+      <div class="travel-intro-grid reveal">
+        <div class="travel-intro-card">
+          <h3>
+            <span style="color:var(--pink);">🏛️</span> Historical Significance
+          </h3>
+          <p>
+            Tiruchirappalli, commonly known as Trichy, has a rich historical legacy dating back over two millennia. Once a prominent stronghold of the ancient Chola dynasty, Trichy flourished magnificently under the subsequent rule of the Nayak dynasty. Iconic landmarks such as the majestic Rockfort Temple and the grand Ranganathaswamy Temple in Srirangam bear timeless testament to the city's ancient heritage, strategic defensive architecture, and breathtaking temple masterworks.
+          </p>
+        </div>
+        <div class="travel-intro-card">
+          <h3>
+            <span style="color:var(--yellow);">🗺️</span> Geographical Features
+          </h3>
+          <p>
+            Nestled amidst the scenic beauty of Tamil Nadu, Tiruchirappalli boasts of the majestic Cauvery River flowing through its heart. The city is uniquely characterized by its soaring rocky outcrops and lush greenery, creating a picturesque contrast for its urban landscape. The surrounding agricultural basin contributes significantly to the state's agriculture, with vibrant green rice paddies and banana groves dotting the beautiful countryside.
+          </p>
+        </div>
+      </div>
+
+      <!-- Grid 1: Primary Places to Visit (No Pics - High Aesthetic Typography) -->
+      <h2 class="section-title">PRIMARY <span>PLACES TO VISIT</span></h2>
+      <div class="travel-places-grid reveal" style="margin-bottom: 4rem;">
+        
+        <!-- Place 1 -->
+        <div class="travel-item-card-no-pic theme-gold">
+          <span class="travel-card-badge">Heritage &amp; Temple</span>
+          <h4><span>🕉️</span> Ranganathaswamy Temple</h4>
+          <p>One of the largest functioning Hindu temples in the world, dedicated to Lord Ranganatha (an incarnation of Lord Vishnu). Spread across a massive 156-acre complex with towering architectural gopurams.</p>
+        </div>
+
+        <!-- Place 2 -->
+        <div class="travel-item-card-no-pic theme-pink">
+          <span class="travel-card-badge">Landmark Fort</span>
+          <h4><span>🏰</span> Rockfort Temple</h4>
+          <p>A historic fortress built on an 83-meter high ancient rock structure. Houses ancient Pallava-era rock-cut cave shrines and a summit temple offering panoramic views of the entire urban landscape.</p>
+        </div>
+
+        <!-- Place 3 -->
+        <div class="travel-item-card-no-pic theme-gold">
+          <span class="travel-card-badge">Island Heritage</span>
+          <h4><span>🏝️</span> Srirangam Island</h4>
+          <p>A picturesque river island bounded by the Cauvery and Kollidam rivers. Home to the legendary temple complex, a critical pilgrimage site in South India, and unique traditional settlements.</p>
+        </div>
+
+        <!-- Place 4 -->
+        <div class="travel-item-card-no-pic theme-blue">
+          <span class="travel-card-badge">Ancient Engineering</span>
+          <h4><span>🌊</span> Kallanai Dam</h4>
+          <p>An ancient water-diversion structure built across the Kaveri River by King Karikala Chola in the 2nd century AD. Celebrated globally as one of the oldest functioning irrigation systems.</p>
+        </div>
+
+        <!-- Place 5 -->
+        <div class="travel-item-card-no-pic theme-gold">
+          <span class="travel-card-badge">Divine Architecture</span>
+          <h4><span>🔱</span> Jambukeswarar Temple</h4>
+          <p>A historic Shiva temple representing the water element (Pancha Bhoota Stalam). Famous for its majestic architectural corridors and an active fresh spring under the primary deity.</p>
+        </div>
+
+        <!-- Place 6 -->
+        <div class="travel-item-card-no-pic theme-purple">
+          <span class="travel-card-badge">Colonial Monument</span>
+          <h4><span>⛪</span> St. Joseph's Church</h4>
+          <p>An elegant, soaring colonial-era Gothic cathedral constructed in 1840. Renowned for its tall spire, intricate stained-glass panels, and serene sanctuary situated in the center of town.</p>
+        </div>
+
+        <!-- Place 7 -->
+        <div class="travel-item-card-no-pic theme-purple">
+          <span class="travel-card-badge">Museum &amp; Art</span>
+          <h4><span>🏺</span> Government Museum</h4>
+          <p>A repository of rich anthropological and geological relics. Showcases Pallava and Chola bronzes, ancient stone sculptures, and historic models of the region's cultural past.</p>
+        </div>
+
+        <!-- Place 8 -->
+        <div class="travel-item-card-no-pic theme-gold">
+          <span class="travel-card-badge">Hill Temple</span>
+          <h4><span>🦚</span> Viralimalai Murugan Temple</h4>
+          <p>Perched atop a natural rocky hill, this ancient temple dedicated to Lord Murugan is surrounded by a scenic sanctuary populated by peacocks, delivering spiritual and aesthetic peace.</p>
+        </div>
+
+      </div>
+
+      <!-- Grid 2: Tourist Attractions (No Pics) -->
+      <h2 class="section-title">SCENIC &amp; <span>TOURIST ATTRACTIONS</span></h2>
+      <div class="travel-places-grid reveal" style="margin-bottom: 4rem;">
+        
+        <!-- Attraction 1 -->
+        <div class="travel-item-card-no-pic theme-blue">
+          <span class="travel-card-badge">Scenic Reservoir</span>
+          <h4><span>🌅</span> Teppakulam</h4>
+          <p>A massive, historically constructed square temple tank with a beautiful central mandapam. Hosts the colorful annual float festival under brilliant lights in the evening.</p>
+        </div>
+
+        <!-- Attraction 2 -->
+        <div class="travel-item-card-no-pic theme-green">
+          <span class="travel-card-badge">Nature Park</span>
+          <h4><span>🦋</span> Butterfly Park</h4>
+          <p>Spanning 35 acres, this spectacular park features beautiful botanical gardens, walking trails, an active breeding conservatory, and peaceful spots ideal for nature enthusiasts.</p>
+        </div>
+
+        <!-- Attraction 3 -->
+        <div class="travel-item-card-no-pic theme-gold">
+          <span class="travel-card-badge">Archeological Cave</span>
+          <h4><span>🎨</span> Kudumiyanmalai Temple</h4>
+          <p>An ancient rock-cut monument decorated with rare carvings and historical inscriptions, representing ancient South Indian musical systems and early structural craftsmanship.</p>
+        </div>
+
+        <!-- Attraction 4 -->
+        <div class="travel-item-card-no-pic theme-green">
+          <span class="travel-card-badge">Natural Valley</span>
+          <h4><span>🏞️</span> Puliyancholai Waterfalls</h4>
+          <p>A tranquil stream cascade nestled inside forest valleys at the foot of the Kolli Hills. Perfect for trekking, nature trails, and spending a quiet afternoon away from urban noise.</p>
+        </div>
+
+        <!-- Attraction 5 -->
+        <div class="travel-item-card-no-pic theme-blue">
+          <span class="travel-card-badge">Recreation Picnic</span>
+          <h4><span>🌳</span> Mukkombu (Upper Anaicut)</h4>
+          <p>A scenic dam spot where the Cauvery river forks beautifully. Features manicured riverside parks, children's playgrounds, and cool river breeze making it a popular family spot.</p>
+        </div>
+
+        <!-- Attraction 6 -->
+        <div class="travel-item-card-no-pic theme-purple">
+          <span class="travel-card-badge">Science &amp; Space</span>
+          <h4><span>🚀</span> Anna Science Centre Planetarium</h4>
+          <p>An immersive scientific hub featuring an active planetarium theater, 3D show galleries, hands-on scientific projects, and an interactive park for tech and space enthusiasts.</p>
+        </div>
+
+        <!-- Attraction 7 -->
+        <div class="travel-item-card-no-pic theme-blue">
+          <span class="travel-card-badge">Sacred Ghat</span>
+          <h4><span>🪔</span> Amma Mandapam Bathing Ghat</h4>
+          <p>A historical stone-carved bathing ghat directly lining the Cauvery River. Frequented by pilgrims participating in traditional prayer routines and sacred rituals.</p>
+        </div>
+
+        <!-- Attraction 8 -->
+        <div class="travel-item-card-no-pic theme-gold">
+          <span class="travel-card-badge">Historic Epigraphy</span>
+          <h4><span>📝</span> Rock Inscriptions of Ucchi Pillayar</h4>
+          <p>Intricate, centuries-old royal inscriptions and engravings carved directly along the stone pathways leading to the summit fortress temple, outlining ancient local annals.</p>
+        </div>
+
+      </div>
+
+      <!-- Grid 3: Culture & Modern Overview -->
+      <div class="travel-intro-grid reveal" style="margin-top:2rem;">
+        <div class="travel-intro-card" style="border-top: 4px solid var(--pink);">
+          <h3>🎭 Cultural Heritage</h3>
+          <p>
+            Trichy is a vibrant tapestry of religious diversity and cultural richness. Magnificently structured temples, ancient mosques, and classic Gothic churches coexist harmoniously, reflecting the city's cosmopolitan history. Traditional festivals like Pongal, Diwali, and Eid are celebrated with immense fervor, with colorful local street processions, classic musical performances, and elaborate temple rituals. Trichy's world-class bronze idol sculpture crafts and high-quality handloom silk sarees highlight the profound talent of local artisans.
+          </p>
+        </div>
+        <div class="travel-intro-card" style="border-top: 4px solid var(--yellow);">
+          <h3>⚡ Modern Development</h3>
+          <p>
+            Trichy beautifully balances its deep historical roots with rapid technical advancement. Elite academic pillars like the National Institute of Technology (NIT Trichy), IIM Trichy, and Bharathidasan University drive innovation. Strategically located in central Tamil Nadu, the city boasts high-quality transport networks. Trichy International Airport (TRZ) connects travelers to global routes, and its massive central railway hub bridges transit across India.
+          </p>
+        </div>
+      </div>
+
+      <!-- Conclusion Strip -->
+      <div class="reveal" style="background:var(--neutral-100); border-radius:12px; padding:2rem; text-align:center; margin-top:3rem; border-left: 6px solid var(--navy);">
+        <h3 style="font-family:var(--font-head); font-size:1.25rem; font-weight:700; color:var(--navy); margin-bottom:.5rem;">Destination Summary</h3>
+        <p style="font-size:.95rem; line-height:1.7; color:var(--gray-600); max-width:850px; margin:0 auto;">
+          Trichy, with its harmonious blend of history, culture, and modernity, offers a captivating tapestry of experiences for visitors. Whether exploring ancient temple corridors, lively handloom bazaars, or scenic riverbeds, Trichy inspires all who step foot here.
+        </p>
+      </div>
+
+    </div>
+  </section>
 </div>
 
 
 <!-- ═══ FOOTER ═══ -->
 <footer>
-  <!-- ADDED: partner/sponsor logo strip in footer -->
-  <!-- pic_1.png = SRM logo, pic_2.png = Springer, pic_3.png = any other partner -->
   <div class="footer-logos">
     <img src="logo.png" alt="SRM IST Logo" title="SRM Institute of Science and Technology" />
   </div>
@@ -986,7 +1227,7 @@
       <h4>About</h4>
       <ul>
         <li><a href="#" onclick="showPage('home');document.getElementById('about').scrollIntoView({behavior:'smooth'})">› About Conference</a></li>
-        <li><a href="#" onclick="showPage('home');document.getElementById('dates').scrollIntoView({behavior:'smooth'})">› Important Dates</a></li>
+        <li><a href="#" onclick="showPage('home');document.getElementById('dates').scrollIntoView({behavior='smooth'})">› Important Dates</a></li>
         <li><a href="#" onclick="showPage('advisory')">› Editors / PC Chairs</a></li>
         <li><a href="#" onclick="showPage('advisory')">› Advisory Board</a></li>
       </ul>
@@ -997,6 +1238,7 @@
         <li><a href="#" onclick="showPage('home');document.getElementById('callforpapers').scrollIntoView({behavior:'smooth'})">› Call for Papers</a></li>
         <li><a href="#" onclick="showPage('home');document.getElementById('registration-home').scrollIntoView({behavior:'smooth'})">› Registration Fees</a></li>
         <li><a href="#" onclick="showPage('registration')">› Online Registration</a></li>
+        <li><a href="#" onclick="showPage('travel-guide')">› Travel Guide</a></li>
         <li><a href="#" onclick="showPage('reach-us')">› Reach Us</a></li>
       </ul>
     </div>
@@ -1017,7 +1259,6 @@
     document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
       a.classList.toggle('active', a.dataset.page === id);
     });
-    /* Re-trigger reveal animations on new page */
     setTimeout(() => {
       document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
     }, 50);
@@ -1037,7 +1278,6 @@
   });
 
   /* ─── ADVISORY BOARD TABS ─── */
-  /* FIX: accept btn element as parameter instead of using unreliable global event.currentTarget */
   function switchTab(btn, name) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
