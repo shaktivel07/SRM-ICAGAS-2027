@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ICAGAS 2027 – International Conference on Agentic and Generative AI</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
   <style>
     /* ─── DESIGN TOKENS ─── */
     :root {
@@ -13,7 +14,7 @@
       --blue9:  #1e3a8a;
       --yellow: #FFC53A;
       --pink:   #f2295b;
-      --pink2:  #db2777;
+      --pink2:  --db2777;
       --white:  #ffffff;
       --neutral-100: #f5f5f5;
       --gray-200: #e5e7eb;
@@ -119,7 +120,7 @@
       font-size: 1.1rem; font-weight: 600; border-radius: 4px;
       transition: background .2s, transform .15s; cursor: pointer;
     }
-    .hero-btn:hover { background: var(--pink2); transform: translateY(-2px); }
+    .hero-btn:hover { background: var(--pink); transform: translateY(-2px); }
     .hero-btn svg { width: 20px; height: 20px; }
 
     /* ─── SECTION UTILITIES ─── */
@@ -209,7 +210,6 @@
       font-weight: 600;
       letter-spacing: 0.02em;
     }
-    /* Stack Card Positions styles */
     .card-pos-0 {
       transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
       z-index: 10;
@@ -234,7 +234,6 @@
       opacity: 0.4;
       pointer-events: none;
     }
-    /* Slide out action logic */
     .deck-card.slide-out {
       transform: translate3d(130%, -25px, 80px) scale(0.9) rotate(15deg) !important;
       opacity: 0 !important;
@@ -266,9 +265,6 @@
       box-shadow: 0 6px 20px rgba(242, 41, 91, 0.4);
       transform: translateY(-2px);
     }
-    .deck-control-btn:active {
-      transform: translateY(0);
-    }
 
     /* ─── KEY DATES ─── */
     .dates-list { display: flex; flex-direction: column; gap: 1.25rem; }
@@ -288,7 +284,7 @@
       content: '›'; color: var(--blue9); font-weight: 700; font-size: 1.1rem; line-height: 1.2; flex-shrink: 0;
     }
 
-    /* ─── FEE DETAILS BOX (RESTRUCTURED) ─── */
+    /* ─── FEE DETAILS BOX ─── */
     .fee-band-box {
       border: 2px solid var(--pink);
       border-radius: 16px;
@@ -335,10 +331,6 @@
     .reg-table td { padding: 1.2rem 1rem; border: 1px solid var(--gray-300); }
     .reg-table tr:hover td { background: #f9fafb; }
     .reg-note { font-size: .82rem; color: var(--gray-600); margin-top: .75rem; }
-
-    /* ─── PUBLICATION / SUBMISSION ─── */
-    .pub-section h3 { font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 .75rem; }
-    .pub-section p { font-size: .93rem; line-height: 1.75; margin-bottom: .5rem; }
 
     /* ─── EDITORS / COMMITTEE ─── */
     .editors-grid { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -402,7 +394,6 @@
       filter: brightness(0) invert(1); opacity: .6;
       transition: opacity .2s;
     }
-    .footer-logos img:hover { opacity: 1; }
 
     /* ─── TABS (Advisory Board) ─── */
     .tab-bar { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
@@ -495,6 +486,54 @@
       font-size: .88rem; line-height: 1.6; color: var(--gray-600);
     }
 
+    /* ─── RESPONSIVE DOWNLOADS TABLE TO CARDS (MODIFIED) ─── */
+    .downloads-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    @media (max-width: 767px) {
+      .downloads-table, 
+      .downloads-table thead, 
+      .downloads-table tbody, 
+      .downloads-table th, 
+      .downloads-table td, 
+      .downloads-table tr {
+        display: block;
+        width: 100%;
+      }
+      .downloads-table thead {
+        display: none;
+      }
+      .downloads-table tr {
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--gray-300);
+        border-radius: 12px;
+        padding: 1.25rem;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      }
+      .downloads-table td {
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        text-align: left !important;
+      }
+      .downloads-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        display: block;
+        color: var(--navy);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+        letter-spacing: 0.05em;
+      }
+      .downloads-table td[data-label="Action"] .hero-btn {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+      }
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (min-width: 768px) {
       #navbar { padding: 0 1.5rem; height: 5rem; }
@@ -522,17 +561,6 @@
       .board-grid { grid-template-columns: repeat(3, 1fr); }
       .travel-places-grid { grid-template-columns: repeat(3, 1fr); }
     }
-
-    /* ─── SMOOTH REVEAL ─── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .5s; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    @media (min-width: 768px) {
-      .cfp-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1024px) {
-      .cfp-grid { grid-template-columns: repeat(3, 1fr); }
-    }
   </style>
 </head>
 <body>
@@ -549,10 +577,11 @@
   <div class="nav-links">
     <a href="#" onclick="showPage('home')"         class="active" data-page="home">Home</a>
     <a href="#" onclick="showPage('about-page')"   data-page="about-page">About</a>
+    <a href="#" onclick="showPage('publication')"  data-page="publication">Publication</a>
     <a href="#" onclick="showPage('registration')" data-page="registration">Registration</a>
     <a href="#" onclick="showPage('advisory')"     data-page="advisory">Advisory Board</a>
     <a href="#" onclick="showPage('travel-guide')" data-page="travel-guide">Travel Guide</a>
-    <a href="#" onclick="showPage('downloads')"     data-page="downloads">Downloads</a>
+    <a href="#" onclick="showPage('downloads')"    data-page="downloads">Downloads</a>
     <a href="#" onclick="showPage('reach-us')"     data-page="reach-us">Reach Us</a>
   </div>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -564,13 +593,13 @@
 <div class="mobile-menu" id="mobile-menu">
   <a href="#" onclick="showPage('home');closeMenu()"         data-page="home">Home</a>
   <a href="#" onclick="showPage('about-page');closeMenu()"   data-page="about-page">About</a>
+  <a href="#" onclick="showPage('publication');closeMenu()"  data-page="publication">Publication</a>
   <a href="#" onclick="showPage('registration');closeMenu()" data-page="registration">Registration</a>
   <a href="#" onclick="showPage('advisory');closeMenu()"     data-page="advisory">Advisory Board</a>
   <a href="#" onclick="showPage('travel-guide');closeMenu()" data-page="travel-guide">Travel Guide</a>
-  <a href="#" onclick="showPage('downloads');closeMenu()"     data-page="downloads">Downloads</a>
+  <a href="#" onclick="showPage('downloads');closeMenu()"    data-page="downloads">Downloads</a>
   <a href="#" onclick="showPage('reach-us');closeMenu()"     data-page="reach-us">Reach Us</a>
 </div>
-
 
 <!-- ═══════════════════════════════════════════ -->
 <!--  PAGE: HOME                                 -->
@@ -651,14 +680,13 @@
     </div>
   </div>
 
-  <!-- UPGRADED: Dynamic Interactive 3D Stacked Deck Campus Gallery -->
+  <!-- STACKED DECK GALLERY -->
   <section class="campus-deck-section">
     <div class="section-center" style="text-align: center;">
       <h2 class="section-title" style="color: #fff; margin-bottom: 0.5rem;">CAMPUS <span>GALLERY</span></h2>
       <p style="font-size: 0.9rem; color: #a0aec0; margin-bottom: 2.5rem;">Click the top picture to cycle through the campus deck</p>
       
       <div class="campus-deck-container" id="campus-deck">
-        <!-- Deck Cards (Auto class positions assigned in Javascript below) -->
         <div class="deck-card" onclick="cycleDeck()">
           <img src="pic_4.JPG.jpg" alt="SRM IST Tiruchirappalli Campus – Main Building" onerror="this.src='https://placehold.co/600x400/0A075F/ffffff?text=SRM+Trichy+Campus'" />
           <div class="deck-card-caption">SRM IST Tiruchirappalli Campus – Main Building</div>
@@ -671,10 +699,9 @@
           <img src="cse.png" alt="SRM IST Campus – Department Block" onerror="this.src='https://placehold.co/600x400/002160/ffffff?text=SRM+Department+Block'" />
           <div class="deck-card-caption">SRM IST Campus – iMac Lab</div>
         </div>
-        
         <div class="deck-card" onclick="cycleDeck()">
           <img src="314A0112 (1).jpg" alt="SRM IST Campus – Auditorium / Conference Hall" onerror="this.src='https://placehold.co/600x400/f2295b/ffffff?text=SRM+Conference+Hall'" />
-          <div class="deck-card-caption"></div>
+          <div class="deck-card-caption">SRM IST Campus – Auditorium / Conference Hall</div>
         </div>
         <div class="deck-card" onclick="cycleDeck()">
           <img src="314A0023 (1).jpg" alt="SRM IST Campus – Library" onerror="this.src='https://placehold.co/600x400/db2777/ffffff?text=SRM+Library'" />
@@ -682,7 +709,6 @@
         </div>
       </div>
       
-      <!-- Manual Control Arrows -->
       <div class="deck-controls">
         <button class="deck-control-btn" onclick="prevDeck()" aria-label="Previous Slide">
           <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
@@ -708,6 +734,21 @@
         <div class="date-item"><span class="date-num">4</span><p>Camera-Ready Delivery to Springer: <strong>19th February 2027</strong></p></div>
         <div class="date-item"><span class="date-num">5</span><p>Conference Dates: <strong>12th – 13th February 2027</strong></p></div>
       </div>
+    </div>
+  </section>
+
+  <!-- CONFERENCE OBJECTIVES (MOVED TO HOME PAGE) -->
+  <section class="section" id="conference-objectives" style="border-top: 1px solid var(--gray-200); background-color: #fafafa;">
+    <div class="section-center">
+      <h2 class="section-title" style="margin-bottom:1.5rem;">CONFERENCE <span>OBJECTIVES</span></h2>
+      <ul class="reg-guidelines reveal" style="margin-top:.75rem;">
+        <li><span class="reg-tick">✓</span>To promote the dissemination of high-quality research in Agentic AI, Generative AI, Engineering Informatics, and Autonomous Systems.</li>
+        <li><span class="reg-tick">✓</span>To foster interdisciplinary collaboration among researchers, industry experts, and practitioners in intelligent autonomous technologies.</li>
+        <li><span class="reg-tick">✓</span>To explore innovative AI-driven solutions for smart manufacturing, robotics, healthcare, transportation, digital twins, and smart cities.</li>
+        <li><span class="reg-tick">✓</span>To encourage the development of trustworthy, explainable, secure, and human-centric AI systems.</li>
+        <li><span class="reg-tick">✓</span>To provide opportunities for knowledge exchange through keynote lectures, technical sessions, workshops, and industry-academia interactions.</li>
+        <li><span class="reg-tick">✓</span>To bridge the gap between cutting-edge AI research and industrial implementation.</li>
+      </ul>
     </div>
   </section>
 
@@ -835,62 +876,15 @@
   <section class="section" id="fees-section">
     <div class="section-center">
       <div class="fee-band-box reveal">
-        <h2>FEE DETAILS</h2>
-        <div class="announced-badge">Will Be Announced Soon</div>
-        <p>The complete registration fee structure for Indian and International authors, students, co-authors, and general attendees is currently being configured and will be published here shortly.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- REGISTRATION (HOME) - PRESERVING THE TABLE BOX -->
-  <section class="section" id="registration-home">
-    <div class="section-wide">
-      <h2 class="section-title">REGISTRATION &amp; <span>GUIDELINES</span></h2>
-      <div class="reveal">
-        <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:1rem;">Registration Guidelines:</h3>
-        <ul class="reg-guidelines">
-          <li><span class="reg-tick">✓</span>For each accepted paper, at least one of the authors must register for the conference.</li>
-          <li><span class="reg-tick">✓</span>One registration in the Student category allows one paper presentation/publication.</li>
-          <li><span class="reg-tick">✓</span>One registration in the Faculty category allows two paper presentations/publications (provided both papers were accepted upon peer review).</li>
-          <li><span class="reg-tick">✓</span>Registration in the Author's Registration Category is mandatory for paper presentation.</li>
-          <li><span class="reg-tick">✓</span>Included: paper in conference proceedings (subject to acceptance and registration).</li>
-          <li><span class="reg-tick">✓</span>Other authors may register as co-authors if one author has already registered in the author category.</li>
-        </ul>
+        <h2>Paper Submission link</h2>
+        <div class="announced-badge">Under construction</div>
         
-        <div class="reg-table-wrap" style="margin-top: 2rem;">
-          <table class="reg-table">
-            <thead>
-              <tr>
-                <th>Category</th>
-                <th>Student / Scholar</th>
-                <th>Faculty / Academic</th>
-                <th>Industry Pro.</th>
-                <th>Co-Author / Attendee</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="font-weight: 600; color: var(--navy);">Authors from India (INR)</td>
-                <td colspan="4" style="text-align: center; font-weight: 600; color: var(--pink); letter-spacing: 0.05em; background: rgba(242,41,91,0.02);">
-                  Will Be Announced Soon
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: 600; color: var(--navy);">Authors outside India (USD)</td>
-                <td colspan="4" style="text-align: center; font-weight: 600; color: var(--pink); letter-spacing: 0.05em; background: rgba(242,41,91,0.02);">
-                  Will Be Announced Soon
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="reg-note">* An early-bird discount on the registration amount structure will be updated here along with key payment deadlines.</p>
       </div>
     </div>
   </section>
 
+  
 </div><!-- end #home page -->
-
 
 <!-- ═══════════════════════════════════════════ -->
 <!--  PAGE: ABOUT                                -->
@@ -935,24 +929,36 @@
       <p>To provide industry-oriented training that prepares graduates for real-world challenges, while emphasising the need for ethical conduct and social responsibility.</p>
     </div>
 
-    <h3>Conference Objectives</h3>
-    <ul class="reg-guidelines" style="margin-top:.75rem;">
-      <li><span class="reg-tick">✓</span>To promote the dissemination of high-quality research in Agentic AI, Generative AI, Engineering Informatics, and Autonomous Systems.</li>
-      <li><span class="reg-tick">✓</span>To foster interdisciplinary collaboration among researchers, industry experts, and practitioners in intelligent autonomous technologies.</li>
-      <li><span class="reg-tick">✓</span>To explore innovative AI-driven solutions for smart manufacturing, robotics, healthcare, transportation, digital twins, and smart cities.</li>
-      <li><span class="reg-tick">✓</span>To encourage the development of trustworthy, explainable, secure, and human-centric AI systems.</li>
-      <li><span class="reg-tick">✓</span>To provide opportunities for knowledge exchange through keynote lectures, technical sessions, workshops, and industry-academia interactions.</li>
-      <li><span class="reg-tick">✓</span>To bridge the gap between cutting-edge AI research and industrial implementation.</li>
-    </ul>
-
-    <h3>Publication &amp; Indexing</h3>
-    <p>All accepted and registered papers will be published in the Springer LNAI (Lecture Notes in Artificial Intelligence) series, subject to approval. Papers will undergo rigorous double-blind peer review. The conference proceedings will be submitted for indexing in Scopus and other major databases.</p>
+    <!-- Conference Objectives has been moved to the home page -->
 
     <h3>Best Paper Award</h3>
     <p>One paper from each of the 10 tracks will be selected as Best Paper and announced at the culmination of the conference.</p>
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════ -->
+<!--  PAGE: PUBLICATION (NEW)                    -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="publication" class="page-section">
+  <div style="height:4.5rem;"></div>
+  <div style="background: linear-gradient(112deg, var(--navy2) 28%, var(--pink) 100%); min-height:25vh; display:flex; align-items:center; justify-content:center;">
+    <div style="text-align:center; color:#fff; padding:2rem 1.5rem;">
+      <h1 style="font-size:clamp(1.4rem,4vw,2.5rem); font-weight:700; font-family:var(--font-head);">Publication &amp; Indexing</h1>
+      <p style="margin-top:.75rem; font-size:1rem; opacity:.85;">Official Archival and Proceedings Information</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="section-center">
+      <div style="background: #ffffff; border-radius: 16px; padding: 3rem 2rem; border: 1px solid var(--gray-300); box-shadow: 0 10px 30px rgba(0,0,0,0.04); text-align: center;">
+        <span style="font-size: 3.5rem; display: block; margin-bottom: 1.5rem;">📖</span>
+        <h2 style="font-family: var(--font-head); font-size: 1.8rem; font-weight: 700; color: var(--blue9); margin-bottom: 1.5rem;">Publication &amp; Indexing</h2>
+        <p style="font-size: 1.15rem; line-height: 1.8; color: var(--gray-800); max-width: 750px; margin: 0 auto; font-weight: 500;">
+          All accepted and registered papers will be published in the Springer LNAI (Lecture Notes in Artificial Intelligence) series, subject to approval.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
 
 <!-- ═══════════════════════════════════════════ -->
 <!--  PAGE: REGISTRATION                         -->
@@ -1057,25 +1063,25 @@
           <p class="editor-name">Dr. Kanaga Suba Raja S</p>
           <p class="editor-role">Lead Guest Editor / Conference Chair</p>
           <p class="editor-affil">Professor, Dept. of Computer Science and Engineering<br/>SRM Institute of Science and Technology, Tiruchirappalli, India</p>
-          
+          <p class="editor-email">📧 hod.cse.try.et@srmist.edu.in</p>
         </div>
         <div class="editor-card">
           <p class="editor-name">Prof. Chin-Shiuh Shieh</p>
           <p class="editor-role">PC Chair</p>
           <p class="editor-affil">Ph.D., Professor, Dept. of Electronic Engineering<br/>National Kaohsiung University of Science and Technology, Taiwan</p>
-          
+          <p class="editor-email">📧 csshieh@nkust.edu.tw</p>
         </div>
         <div class="editor-card">
           <p class="editor-name">Dr. Wai-Keung Fung</p>
           <p class="editor-role">PC Chair</p>
           <p class="editor-affil">Professor in Electronics, Robotics &amp; Control Engineering<br/>Cardiff School of Technologies, Cardiff Metropolitan University, UK</p>
-          
+          <p class="editor-email">📧 WFung@cardiffmet.ac.uk</p>
         </div>
         <div class="editor-card">
           <p class="editor-name">Prof. Osvaldo Gervasi</p>
           <p class="editor-role">PC Member</p>
           <p class="editor-affil">Associate Professor, Dept. of Mathematics and Computer Science<br/>University of Perugia, Italy · Senior Member IEEE &amp; ACM</p>
-          
+          <p class="editor-email">📧 osvaldo.gervasi@unipg.it</p>
         </div>
       </div>
 
@@ -1099,7 +1105,6 @@
           <div class="board-card"><p class="board-name">Prof. Chin-Shiuh Shieh</p><p class="board-uni">National Kaohsiung University of Science and Technology</p><p class="board-country">Taiwan</p></div>
           <div class="board-card"><p class="board-name">Dr. Wai-Keung Fung</p><p class="board-uni">Cardiff Metropolitan University</p><p class="board-country">United Kingdom</p></div>
           
-          <!-- Newly Added International Advisory Board Members -->
           <div class="board-card"><p class="board-name">George A. Tsihrintzis</p><p class="board-uni">University of Piraeus</p><p class="board-country">Greece</p></div>
           <div class="board-card"><p class="board-name">Dijana Oreski</p><p class="board-uni">University of Zagreb, Varazdin</p><p class="board-country">Croatia</p></div>
           <div class="board-card"><p class="board-name">Nuno M. Garcia</p><p class="board-uni">University of Beira Interior</p><p class="board-country">Portugal</p></div>
@@ -1263,56 +1268,48 @@
       <h2 class="section-title">PRIMARY <span>PLACES TO VISIT</span></h2>
       <div class="travel-places-grid reveal" style="margin-bottom: 4rem;">
         
-        <!-- Place 1 -->
         <div class="travel-item-card-no-pic theme-gold">
           <span class="travel-card-badge">Heritage &amp; Temple</span>
           <h4><span>🕉️</span> Ranganathaswamy Temple</h4>
           <p>One of the largest functioning Hindu temples in the world, dedicated to Lord Ranganatha (an incarnation of Lord Vishnu). Spread across a massive 156-acre complex with towering architectural gopurams.</p>
         </div>
 
-        <!-- Place 2 -->
         <div class="travel-item-card-no-pic theme-pink">
           <span class="travel-card-badge">Landmark Fort</span>
           <h4><span>🏰</span> Rockfort Temple</h4>
           <p>A historic fortress built on an 83-meter high ancient rock structure. Houses ancient Pallava-era rock-cut cave shrines and a summit temple offering panoramic views of the entire urban landscape.</p>
         </div>
 
-        <!-- Place 3 -->
         <div class="travel-item-card-no-pic theme-gold">
           <span class="travel-card-badge">Island Heritage</span>
           <h4><span>🏝️</span> Srirangam Island</h4>
           <p>A picturesque river island bounded by the Cauvery and Kollidam rivers. Home to the legendary temple complex, a critical pilgrimage site in South India, and unique traditional settlements.</p>
         </div>
 
-        <!-- Place 4 -->
         <div class="travel-item-card-no-pic theme-blue">
           <span class="travel-card-badge">Ancient Engineering</span>
           <h4><span>🌊</span> Kallanai Dam</h4>
           <p>An ancient water-diversion structure built across the Kaveri River by King Karikala Chola in the 2nd century AD. Celebrated globally as one of the oldest functioning irrigation systems.</p>
         </div>
 
-        <!-- Place 5 -->
         <div class="travel-item-card-no-pic theme-gold">
           <span class="travel-card-badge">Divine Architecture</span>
           <h4><span>🔱</span> Jambukeswarar Temple</h4>
           <p>A historic Shiva temple representing the water element (Pancha Bhoota Stalam). Famous for its majestic architectural corridors and an active fresh spring under the primary deity.</p>
         </div>
 
-        <!-- Place 6 -->
         <div class="travel-item-card-no-pic theme-purple">
           <span class="travel-card-badge">Colonial Monument</span>
           <h4><span>⛪</span> St. Joseph's Church</h4>
           <p>An elegant, soaring colonial-era Gothic cathedral constructed in 1840. Renowned for its tall spire, intricate stained-glass panels, and serene sanctuary situated in the center of town.</p>
         </div>
 
-        <!-- Place 7 -->
         <div class="travel-item-card-no-pic theme-purple">
           <span class="travel-card-badge">Museum &amp; Art</span>
           <h4><span>🏺</span> Government Museum</h4>
           <p>A repository of rich anthropological and geological relics. Showcases Pallava and Chola bronzes, ancient stone sculptures, and historic models of the region's cultural past.</p>
         </div>
 
-        <!-- Place 8 -->
         <div class="travel-item-card-no-pic theme-gold">
           <span class="travel-card-badge">Hill Temple</span>
           <h4><span>🦚</span> Viralimalai Murugan Temple</h4>
@@ -1325,56 +1322,48 @@
       <h2 class="section-title">SCENIC &amp; <span>TOURIST ATTRACTIONS</span></h2>
       <div class="travel-places-grid reveal" style="margin-bottom: 4rem;">
         
-        <!-- Attraction 1 -->
         <div class="travel-item-card-no-pic theme-blue">
           <span class="travel-card-badge">Scenic Reservoir</span>
           <h4><span>🌅</span> Teppakulam</h4>
           <p>A massive, historically constructed square temple tank with a beautiful central mandapam. Hosts the colorful annual float festival under brilliant lights in the evening.</p>
         </div>
 
-        <!-- Attraction 2 -->
         <div class="travel-item-card-no-pic theme-green">
           <span class="travel-card-badge">Nature Park</span>
           <h4><span>🦋</span> Butterfly Park</h4>
           <p>Spanning 35 acres, this spectacular park features beautiful botanical gardens, walking trails, an active breeding conservatory, and peaceful spots ideal for nature enthusiasts.</p>
         </div>
 
-        <!-- Attraction 3 -->
         <div class="travel-item-card-no-pic theme-gold">
           <span class="travel-card-badge">Archeological Cave</span>
           <h4><span>🎨</span> Kudumiyanmalai Temple</h4>
           <p>An ancient rock-cut monument decorated with rare carvings and historical inscriptions, representing ancient South Indian musical systems and early structural craftsmanship.</p>
         </div>
 
-        <!-- Attraction 4 -->
         <div class="travel-item-card-no-pic theme-green">
           <span class="travel-card-badge">Natural Valley</span>
           <h4><span>🏞️</span> Puliyancholai Waterfalls</h4>
           <p>A tranquil stream cascade nestled inside forest valleys at the foot of the Kolli Hills. Perfect for trekking, nature trails, and spending a quiet afternoon away from urban noise.</p>
         </div>
 
-        <!-- Attraction 5 -->
         <div class="travel-item-card-no-pic theme-blue">
           <span class="travel-card-badge">Recreation Picnic</span>
           <h4><span>🌳</span> Mukkombu (Upper Anaicut)</h4>
           <p>A scenic dam spot where the Cauvery river forks beautifully. Features manicured riverside parks, children's playgrounds, and cool river breeze making it a popular family spot.</p>
         </div>
 
-        <!-- Attraction 6 -->
         <div class="travel-item-card-no-pic theme-purple">
           <span class="travel-card-badge">Science &amp; Space</span>
           <h4><span>🚀</span> Anna Science Centre Planetarium</h4>
           <p>An immersive scientific hub featuring an active planetarium theater, 3D show galleries, hands-on scientific projects, and an interactive park for tech and space enthusiasts.</p>
         </div>
 
-        <!-- Attraction 7 -->
         <div class="travel-item-card-no-pic theme-blue">
           <span class="travel-card-badge">Sacred Ghat</span>
           <h4><span>🪔</span> Amma Mandapam Bathing Ghat</h4>
           <p>A historical stone-carved bathing ghat directly lining the Cauvery River. Frequented by pilgrims participating in traditional prayer routines and sacred rituals.</p>
         </div>
 
-        <!-- Attraction 8 -->
         <div class="travel-item-card-no-pic theme-gold">
           <span class="travel-card-badge">Historic Epigraphy</span>
           <h4><span>📝</span> Rock Inscriptions of Ucchi Pillayar</h4>
@@ -1437,18 +1426,18 @@
         Please prepare your manuscripts in accordance with the templates provided below to ensure seamless publication in the Springer LNAI/LNCS Proceedings.
       </p>
 
-      <div class="reg-table-wrap" style="box-shadow: 0 4px 15px rgba(0,0,0,0.04); border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-200);">
-        <table class="reg-table">
+      <div style="box-shadow: 0 4px 15px rgba(0,0,0,0.04); border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-200); background: #fff; padding: 0.5rem;">
+        <table class="downloads-table">
           <thead>
             <tr>
-              <th style="padding: 1rem; font-size: 0.95rem; background: var(--gray-200); width: 60%;">Resource / Template Name</th>
+              <th style="padding: 1rem; font-size: 0.95rem; background: var(--gray-200); width: 60%; text-align: left;">Resource / Template Name</th>
               <th style="padding: 1rem; font-size: 0.95rem; background: var(--gray-200); text-align: center; width: 15%;">Format</th>
               <th style="padding: 1rem; font-size: 0.95rem; background: var(--gray-200); text-align: center; width: 25%;">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style="padding: 1.25rem 1rem;">
+              <td data-label="Resource / Template Name" style="padding: 1.25rem 1rem;">
                 <div style="display: flex; align-items: start; gap: 0.75rem;">
                   <span style="font-size: 1.5rem; line-height: 1;">📋</span>
                   <div>
@@ -1457,10 +1446,10 @@
                   </div>
                 </div>
               </td>
-              <td style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
+              <td data-label="Format" style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
                 <span style="background: rgba(242,41,91,0.1); color: var(--pink); padding: 0.3rem 0.8rem; border-radius: 99px; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.05em;">PDF</span>
               </td>
-              <td style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
+              <td data-label="Action" style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
                 <a href="checklist.pdf" download class="hero-btn" style="padding: 0.55rem 1.25rem; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; text-transform: none; border-radius: 6px; box-shadow: 0 2px 8px rgba(242,41,91,0.2);">
                   Download 
                   <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="stroke-width: 2.5;"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
@@ -1468,7 +1457,7 @@
               </td>
             </tr>
             <tr>
-              <td style="padding: 1.25rem 1rem;">
+              <td data-label="Resource / Template Name" style="padding: 1.25rem 1rem;">
                 <div style="display: flex; align-items: start; gap: 0.75rem;">
                   <span style="font-size: 1.5rem; line-height: 1;">📝</span>
                   <div>
@@ -1477,10 +1466,10 @@
                   </div>
                 </div>
               </td>
-              <td style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
+              <td data-label="Format" style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
                 <span style="background: rgba(242,41,91,0.1); color: var(--pink); padding: 0.3rem 0.8rem; border-radius: 99px; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.05em;">PDF</span>
               </td>
-              <td style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
+              <td data-label="Action" style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
                 <a href="Manuscript_Guidelines.pdf" download class="hero-btn" style="padding: 0.55rem 1.25rem; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; text-transform: none; border-radius: 6px; box-shadow: 0 2px 8px rgba(242,41,91,0.2);">
                   Download
                   <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="stroke-width: 2.5;"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
@@ -1488,7 +1477,7 @@
               </td>
             </tr>
             <tr>
-              <td style="padding: 1.25rem 1rem;">
+              <td data-label="Resource / Template Name" style="padding: 1.25rem 1rem;">
                 <div style="display: flex; align-items: start; gap: 0.75rem;">
                   <span style="font-size: 1.5rem; line-height: 1;">📁</span>
                   <div>
@@ -1497,10 +1486,10 @@
                   </div>
                 </div>
               </td>
-              <td style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
+              <td data-label="Format" style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
                 <span style="background: rgba(30,58,138,0.1); color: var(--blue9); padding: 0.3rem 0.8rem; border-radius: 99px; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.05em;">ZIP</span>
               </td>
-              <td style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
+              <td data-label="Action" style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
                 <a href="Springer_Word_Template.zip" download class="hero-btn" style="padding: 0.55rem 1.25rem; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; text-transform: none; border-radius: 6px; box-shadow: 0 2px 8px rgba(242,41,91,0.2);">
                   Download
                   <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="stroke-width: 2.5;"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
@@ -1508,7 +1497,7 @@
               </td>
             </tr>
             <tr>
-              <td style="padding: 1.25rem 1rem;">
+              <td data-label="Resource / Template Name" style="padding: 1.25rem 1rem;">
                 <div style="display: flex; align-items: start; gap: 0.75rem;">
                   <span style="font-size: 1.5rem; line-height: 1;">📦</span>
                   <div>
@@ -1517,10 +1506,10 @@
                   </div>
                 </div>
               </td>
-              <td style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
+              <td data-label="Format" style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
                 <span style="background: rgba(30,58,138,0.1); color: var(--blue9); padding: 0.3rem 0.8rem; border-radius: 99px; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.05em;">ZIP</span>
               </td>
-              <td style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
+              <td data-label="Action" style="text-align: center; padding: 1.25rem 1rem; vertical-align: middle;">
                 <a href="Springer_Latex_Template.zip" download class="hero-btn" style="padding: 0.55rem 1.25rem; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; text-transform: none; border-radius: 6px; box-shadow: 0 2px 8px rgba(242,41,91,0.2);">
                   Download
                   <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="stroke-width: 2.5;"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
@@ -1590,6 +1579,7 @@
       <ul>
         <li><a href="#" onclick="showPage('home');document.getElementById('about').scrollIntoView({behavior:'smooth'})">› About Conference</a></li>
         <li><a href="#" onclick="showPage('home');document.getElementById('dates').scrollIntoView({behavior:'smooth'})">› Important Dates</a></li>
+        <li><a href="#" onclick="showPage('publication')">› Publication &amp; Indexing</a></li>
         <li><a href="#" onclick="showPage('advisory')">› Editors / PC Chairs</a></li>
         <li><a href="#" onclick="showPage('advisory')">› Advisory Board</a></li>
       </ul>
@@ -1601,6 +1591,7 @@
         <li><a href="#" onclick="showPage('home');document.getElementById('registration-home').scrollIntoView({behavior:'smooth'})">› Registration Guidelines</a></li>
         <li><a href="#" onclick="showPage('registration')">› Online Registration</a></li>
         <li><a href="#" onclick="showPage('travel-guide')">› Travel Guide</a></li>
+        <li><a href="#" onclick="showPage('downloads')">› Downloads</a></li>
         <li><a href="#" onclick="showPage('reach-us')">› Reach Us</a></li>
       </ul>
     </div>
@@ -1661,10 +1652,7 @@
 
   function updateDeckStyles() {
     deckCards.forEach((card, i) => {
-      // Calculate relative position inside the stack based on active index
       let pos = (i - deckIndex + totalDeckCards) % totalDeckCards;
-      
-      // Clean and assign position classes
       card.className = 'deck-card';
       card.classList.add(`card-pos-${pos}`);
     });
@@ -1674,7 +1662,6 @@
     const activeCard = document.querySelector('.deck-card.card-pos-0');
     if (activeCard) {
       activeCard.classList.add('slide-out');
-      // Delay state update slightly to let slide-out transition complete
       setTimeout(() => {
         deckIndex = (deckIndex + 1) % totalDeckCards;
         updateDeckStyles();
@@ -1686,13 +1673,11 @@
   }
 
   function prevDeck() {
-    // Reverse cycle logic
     deckIndex = (deckIndex - 1 + totalDeckCards) % totalDeckCards;
     updateDeckStyles();
   }
 
   function cycleDeck() {
-    // Trigger slide transition on card click
     nextDeck();
     resetDeckAutoplay();
   }
@@ -1706,7 +1691,6 @@
     startDeckAutoplay();
   }
 
-  // Initialize and assign Hover triggers
   window.onload = function() {
     updateDeckStyles();
     startDeckAutoplay();
