@@ -81,7 +81,7 @@
     @media (min-width: 768px) { #home { margin-top: 5rem; } }
 
     .hero-section {
-      position: relative; min-height: 60vh;
+      position: relative; min-height: 65vh;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
     }
@@ -95,15 +95,13 @@
     }
     .hero-content {
       position: relative; z-index: 10; text-align: center; color: #fff;
-      padding: 3rem 1.5rem; max-width: 860px;
+      padding: 3.5rem 1.5rem; max-width: 980px;
     }
     .hero-badge {
       display: inline-block; background: rgba(255,197,58,.18); border: 1px solid rgba(255,197,58,.5);
       border-radius: 99px; padding: .35rem 1.2rem; font-size: .78rem; font-weight: 600;
       letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1.25rem; color: var(--yellow);
     }
-    .hero-content h1 { font-family: var(--font-head); font-size: clamp(1.4rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; margin-bottom: .5rem; }
-    .hero-content h2 { font-size: clamp(1rem, 2.5vw, 1.5rem); font-weight: 700; color: var(--yellow); margin-bottom: 1.5rem; }
     .hero-divider {
       display: flex; align-items: center; justify-content: center; gap: 1rem;
       font-size: .9rem; font-weight: 500; margin-bottom: 1.25rem;
@@ -111,19 +109,6 @@
     .hero-divider::before, .hero-divider::after {
       content: ''; flex: 1; max-width: 80px; height: 1.5px; background: rgba(255,255,255,.5);
     }
-
-    .hero-logos {
-      display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
-      gap: 1.25rem; margin-bottom: 1.5rem; padding: .75rem 1rem;
-      background: rgba(255,255,255,.1); border-radius: 8px;
-      backdrop-filter: blur(4px);
-    }
-    .hero-logos img {
-      height: 48px; width: auto; object-fit: contain;
-      filter: brightness(0) invert(1); opacity: .85;
-      transition: opacity .2s;
-    }
-    .hero-logos img:hover { opacity: 1; }
 
     .hero-meta { display: flex; flex-direction: column; gap: .75rem; align-items: center; margin-bottom: 2rem; }
     .hero-meta-item { display: flex; align-items: center; gap: .6rem; font-size: 1rem; font-weight: 500; }
@@ -248,31 +233,58 @@
       content: '›'; color: var(--blue9); font-weight: 700; font-size: 1.1rem; line-height: 1.2; flex-shrink: 0;
     }
 
-    /* ─── FEE BAND ─── */
-    .fee-band {
-      background: linear-gradient(to right, var(--yellow), var(--pink));
-      color: #fff; padding: 2.5rem 1.5rem; text-align: center;
+    /* ─── FEE DETAILS BOX (RESTRUCTURED) ─── */
+    .fee-band-box {
+      border: 2px solid var(--pink);
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, rgba(255,197,58,0.06) 0%, rgba(242,41,91,0.06) 100%);
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(242,41,91,0.05);
     }
-    .fee-band h2 { font-family: var(--font-head); font-size: 1.6rem; font-weight: 600; margin-bottom: 1.5rem; }
-    .fee-list { list-style: disc; display: inline-block; text-align: left; font-size: 1rem; line-height: 2; padding-left: 1.5rem; }
-    .fee-note { font-weight: 700; margin-top: 1rem; }
+    .fee-band-box h2 {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--blue9);
+      margin-bottom: 1rem;
+    }
+    .fee-band-box .announced-badge {
+      display: inline-block;
+      background: var(--pink);
+      color: #fff;
+      padding: 0.6rem 2rem;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(242,41,91,0.35);
+    }
+    .fee-band-box p {
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      margin-top: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
 
     /* ─── REGISTRATION ─── */
     .reg-guidelines { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
     .reg-guidelines li { display: flex; align-items: flex-start; gap: .6rem; font-size: .93rem; line-height: 1.6; }
     .reg-tick { color: var(--blue9); font-weight: 700; font-size: 1.2rem; flex-shrink: 0; line-height: 1.3; }
+    
+    /* THE BOX structure for registration table */
     .reg-table-wrap { overflow-x: auto; margin-top: 1.5rem; }
     .reg-table { width: 100%; border-collapse: collapse; min-width: 600px; font-size: .9rem; }
-    .reg-table th { background: var(--gray-200); padding: .6rem 1rem; border: 1px solid var(--gray-300); text-align: left; font-weight: 600; }
-    .reg-table td { padding: .6rem 1rem; border: 1px solid var(--gray-300); }
+    .reg-table th { background: var(--gray-200); padding: .8rem 1rem; border: 1px solid var(--gray-300); text-align: left; font-weight: 600; }
+    .reg-table td { padding: 1.2rem 1rem; border: 1px solid var(--gray-300); }
     .reg-table tr:hover td { background: #f9fafb; }
     .reg-note { font-size: .82rem; color: var(--gray-600); margin-top: .75rem; }
 
     /* ─── PUBLICATION / SUBMISSION ─── */
     .pub-section h3 { font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 .75rem; }
     .pub-section p { font-size: .93rem; line-height: 1.75; margin-bottom: .5rem; }
-    .pub-section ol { list-style: none; display: flex; flex-direction: column; gap: .75rem; padding: 0; }
-    .pub-section ol li { display: flex; align-items: flex-start; gap: .6rem; font-size: .93rem; line-height: 1.6; }
 
     /* ─── EDITORS / COMMITTEE ─── */
     .editors-grid { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -370,7 +382,7 @@
     .about-vision-item { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: .75rem; font-size: .93rem; line-height: 1.7; }
     .tick-icon { color: var(--blue9); font-size: 1.3rem; flex-shrink: 0; line-height: 1.2; }
 
-    /* ─── TRAVEL GUIDE PAGE STYLING (NEW CONTENT) ─── */
+    /* ─── TRAVEL GUIDE PAGE STYLING ─── */
     .travel-hero-overlay {
       position: relative; min-height: 38vh; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
@@ -409,7 +421,7 @@
       text-transform: uppercase; padding: .25rem .75rem; border-radius: 99px;
       letter-spacing: .05em; margin-bottom: 0.75rem;
     }
-    /* Theme color definitions for dynamic typography card borders */
+    
     .theme-gold { border-top: 4px solid var(--yellow); }
     .theme-gold .travel-card-badge { background: rgba(255,197,58,0.15); color: #b28511; }
     .theme-blue { border-top: 4px solid var(--blue9); }
@@ -444,13 +456,13 @@
       .about-detail-img { height: 50vh; }
       .about-detail-content { padding: 3rem 5rem; }
 
-      /* Travel page responsive rules */
       .travel-intro-grid { grid-template-columns: repeat(2, 1fr); }
       .travel-places-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 767px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
+      br.desktop-only { display: none; }
     }
     @media (min-width: 1024px) {
       .board-grid { grid-template-columns: repeat(3, 1fr); }
@@ -511,35 +523,42 @@
 
   <!-- HERO -->
   <section class="hero-section" style="position: relative; overflow: hidden;">
-    <!-- Made the background image brighter (brightness: .75 instead of .45) -->
     <div class="hero-bg" style="position: absolute; inset: 0; z-index: 0;">
       <img src="pic_4.JPG.jpeg" alt="Hero Background"
            style="width: 100%; height: 100%; object-fit: cover; filter: brightness(.75);"
            onerror="this.src='https://placehold.co'" />
     </div>
     
-    <!-- Reduced overlay intensity inline to let the image show through clearly -->
-    <div class="hero-overlay" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.3); z-index: 1;"></div>
+    <div class="hero-overlay" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); z-index: 1;"></div>
     
     <div class="hero-content reveal" style="position: relative; z-index: 2;">
       <div class="hero-badge">Springer LNAI Series (Pending Approval)</div>
-      <h1>International Conference on Agentic and Generative Artificial Intelligence</h1>
-      <h2>for Advanced Engineering Informatics and Autonomous Systems</h2>
+      
+      <!-- Title: Same font size on both lines, breaking exactly into 2 lines on desktop viewports -->
+      <h1 style="font-size: clamp(1.4rem, 3.6vw, 2.5rem); font-weight: 700; font-family: var(--font-head); max-width: 950px; margin: 0 auto 1rem; line-height: 1.35; color: #fff;">
+        International Conference on Agentic and Generative Artificial Intelligence <br class="desktop-only" />for Advanced Engineering Informatics and Autonomous Systems
+      </h1>
+      
+      <!-- SRMIST organization subtitle added immediately below the main title -->
+      <p style="font-size: clamp(0.9rem, 1.8vw, 1.2rem); font-weight: 600; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+        Organized by SRM Institute of Science and Technology, Tiruchirappalli
+      </p>
+
       <div class="hero-divider">ICAGAS 2027</div>
 
       <div class="hero-meta">
         <div class="hero-meta-item">
-          <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
           12TH &amp; 13TH FEBRUARY 2027
         </div>
         <div class="hero-meta-item">
-          <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           SRM IST, Tiruchirappalli &nbsp;·&nbsp; Hybrid Mode
         </div>
       </div>
       <span class="hero-btn" onclick="showPage('registration')">
         Register
-        <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </span>
     </div>
   </section>
@@ -593,7 +612,6 @@
       <img src="pic_5.JPG.jpeg" alt="SRM IST Campus – Department Block" loading="lazy" onerror="this.src='https://placehold.co/600x400/002160/ffffff?text=SRM+Department+Block'" />
       <img src="314A0112.JPG" alt="SRM IST Campus – Auditorium / Conference Hall" loading="lazy" onerror="this.src='https://placehold.co/600x400/f2295b/ffffff?text=SRM+Conference+Hall'" />
       <img src="314A0023.JPG" alt="SRM IST Campus – Library" loading="lazy" onerror="this.src='https://placehold.co/600x400/db2777/ffffff?text=SRM+Library'" />
-
     </div>
   </div>
 
@@ -734,23 +752,21 @@
     </div>
   </section>
 
-  <!-- FEE DETAILS -->
-  <div class="fee-band reveal">
-    <h2>FEE DETAILS</h2>
-    <ul class="fee-list">
-      <li>UG Students / PG Students / Research Scholars: <strong>₹13,000 INR</strong></li>
-      <li>Faculty / Academician: <strong>₹14,000 INR</strong></li>
-      <li>Industry Professional: <strong>₹15,000 INR</strong></li>
-      <li>Co-Author / Attendee: <strong>₹2,000 INR</strong></li>
-      <li>Authors from Outside India: <strong>$200 USD</strong></li>
-    </ul>
-    <p class="fee-note">* Early bird discount of 10% available for registrations before the specified date.</p>
-  </div>
+  <!-- FEE DETAILS - PRESERVING THE BOX STRUCTURE -->
+  <section class="section" id="fees-section">
+    <div class="section-center">
+      <div class="fee-band-box reveal">
+        <h2>FEE DETAILS</h2>
+        <div class="announced-badge">Will Be Announced Soon</div>
+        <p>The complete registration fee structure for Indian and International authors, students, co-authors, and general attendees is currently being configured and will be published here shortly.</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- REGISTRATION (HOME) -->
+  <!-- REGISTRATION (HOME) - PRESERVING THE TABLE BOX -->
   <section class="section" id="registration-home">
     <div class="section-wide">
-      <h2 class="section-title">REGISTRATION &amp; <span>PRICING</span></h2>
+      <h2 class="section-title">REGISTRATION &amp; <span>GUIDELINES</span></h2>
       <div class="reveal">
         <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:1rem;">Registration Guidelines:</h3>
         <ul class="reg-guidelines">
@@ -761,7 +777,9 @@
           <li><span class="reg-tick">✓</span>Included: paper in conference proceedings (subject to acceptance and registration).</li>
           <li><span class="reg-tick">✓</span>Other authors may register as co-authors if one author has already registered in the author category.</li>
         </ul>
-        <div class="reg-table-wrap">
+        
+        <!-- RESTORED: Table "Box" Structure with TBA placeholders inside the columns -->
+        <div class="reg-table-wrap" style="margin-top: 2rem;">
           <table class="reg-table">
             <thead>
               <tr>
@@ -774,23 +792,21 @@
             </thead>
             <tbody>
               <tr>
-                <td>Authors from India (INR)</td>
-                <td>₹13,000</td>
-                <td>₹14,000</td>
-                <td>₹15,000</td>
-                <td>₹2,000</td>
+                <td style="font-weight: 600; color: var(--navy);">Authors from India (INR)</td>
+                <td colspan="4" style="text-align: center; font-weight: 600; color: var(--pink); letter-spacing: 0.05em; background: rgba(242,41,91,0.02);">
+                  Will Be Announced Soon
+                </td>
               </tr>
               <tr>
-                <td>Authors outside India (USD)</td>
-                <td>$200</td>
-                <td>$200</td>
-                <td>$200</td>
-                <td>$65</td>
+                <td style="font-weight: 600; color: var(--navy);">Authors outside India (USD)</td>
+                <td colspan="4" style="text-align: center; font-weight: 600; color: var(--pink); letter-spacing: 0.05em; background: rgba(242,41,91,0.02);">
+                  Will Be Announced Soon
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p class="reg-note">* Authors are eligible for an early bird discount of 10% on the registration fee if they register before the specified date.</p>
+        <p class="reg-note">* An early-bird discount on the registration amount structure will be updated here along with key payment deadlines.</p>
       </div>
     </div>
   </section>
@@ -822,10 +838,9 @@
     <h2>About SRM IST Tiruchirappalli</h2>
     <p>One of the best universities in India, SRM Institute of Science and Technology (NIRF ranking 18 under the university category, NAAC A++ grade) offers a wide range of undergraduate, graduate, and doctorate programmes in six faculties: Engineering &amp; Technology, Management, Medicine &amp; Health Sciences, Science &amp; Humanities, Law, and Agricultural Sciences. Its campuses are located in and around Chennai, Tiruchirappalli (TN), Modinagar (UP), Sonepat (Haryana), Amaravati (AP), and Gangtok (Sikkim).</p>
 
-<img src="cse.png" alt="SRM IST Tiruchirappalli Department of CSE"
-     style="width: 100%; height: auto; max-height: 250px; object-fit: contain; border-radius: 8px; margin: 1.5rem 0;"
-     onerror="this.src='https://placehold.co/1200x400/002160/ffffff?text=Department+of+CSE'" />
-
+    <img src="cse.png" alt="SRM IST Tiruchirappalli Department of CSE"
+         style="width: 100%; height: auto; max-height: 250px; object-fit: contain; border-radius: 8px; margin: 1.5rem 0;"
+         onerror="this.src='https://placehold.co/1200x400/002160/ffffff?text=Department+of+CSE'" />
 
     <h2>About the Department of CSE</h2>
     <p>The Department of Computer Science and Engineering at SRM Institute of Science and Technology, Trichy was established in 2021 with the aim of giving standard education to students and helping them reach their full potential. The department provides top-notch IT infrastructure, a world-class environment for learning and research, collaborations with industry leaders, and promotes moral and ethical values.</p>
@@ -902,6 +917,7 @@
         <li><span class="reg-tick">✓</span>Other authors may register as co-authors if at least one author has already registered in the author category.</li>
       </ul>
 
+      <!-- RESTORED: Table "Box" structure for fee schedule on the inner registration page -->
       <h3>Per-Person Registration Fee Structure</h3>
       <div class="reg-table-wrap">
         <table class="reg-table">
@@ -916,23 +932,21 @@
           </thead>
           <tbody>
             <tr>
-              <td>Authors from India (INR)</td>
-              <td>₹13,000</td>
-              <td>₹14,000</td>
-              <td>₹15,000</td>
-              <td>₹2,000</td>
+              <td style="font-weight: 600; color: var(--navy);">Authors from India (INR)</td>
+              <td colspan="4" style="text-align: center; font-weight: 600; color: var(--pink); letter-spacing: 0.05em; background: rgba(242,41,91,0.02);">
+                Will Be Announced Soon
+              </td>
             </tr>
             <tr>
-              <td>Authors outside India (USD)</td>
-              <td>$200</td>
-              <td>$200</td>
-              <td>$200</td>
-              <td>$65</td>
+              <td style="font-weight: 600; color: var(--navy);">Authors outside India (USD)</td>
+              <td colspan="4" style="text-align: center; font-weight: 600; color: var(--pink); letter-spacing: 0.05em; background: rgba(242,41,91,0.02);">
+                Will Be Announced Soon
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="reg-note">* Early bird discount of 10% is available for registrations completed before the specified date.</p>
+      <p class="reg-note">* Payment portal integration and bank account details will be updated here immediately upon fee release approval.</p>
 
       <div style="text-align:center; margin-top:3rem; padding: 2rem; background: var(--neutral-100); border-radius:8px;">
         <h2 style="font-size:1.5rem;font-weight:700;color:var(--gray-800);margin-bottom:.75rem;">Online Registration Coming Soon</h2>
@@ -1029,7 +1043,7 @@
 
 
 <!-- ═══════════════════════════════════════════ -->
-<!--  PAGE: TRAVEL GUIDE (NEW PAGE)             -->
+<!--  PAGE: TRAVEL GUIDE                         -->
 <!-- ═══════════════════════════════════════════ -->
 <div id="travel-guide" class="page-section">
   <div style="height:4.5rem;"></div>
@@ -1213,7 +1227,7 @@
       <div class="reveal" style="background:var(--neutral-100); border-radius:12px; padding:2rem; text-align:center; margin-top:3rem; border-left: 6px solid var(--navy);">
         <h3 style="font-family:var(--font-head); font-size:1.25rem; font-weight:700; color:var(--navy); margin-bottom:.5rem;">Destination Summary</h3>
         <p style="font-size:.95rem; line-height:1.7; color:var(--gray-600); max-width:850px; margin:0 auto;">
-          Trichy, with its harmonious blend of history, culture, and modernity, offers a captivating tapestry of experiences for visitors. Whether exploring ancient temple corridors, lively handloom bazaars, or scenic riverbeds, Trichy inspires all who step foot here.
+          Trichy, with its harmonious blend of history, culture, and modernity, offers a captivating tapestry of experiences for visitors and residents alike. Whether exploring ancient temple corridors, lively handloom bazaars, or scenic riverbeds, Trichy inspires all who step foot here.
         </p>
       </div>
 
@@ -1264,7 +1278,6 @@
 <footer>
   <div>
     <img src="logo_1.png" alt="SRM IST Logo" style="width: 150px; height: auto;" title="SRM Institute of Science and Technology" />
-    
   </div>
 
   <div class="footer-inner">
@@ -1272,7 +1285,7 @@
       <h4>About</h4>
       <ul>
         <li><a href="#" onclick="showPage('home');document.getElementById('about').scrollIntoView({behavior:'smooth'})">› About Conference</a></li>
-        <li><a href="#" onclick="showPage('home');document.getElementById('dates').scrollIntoView({behavior='smooth'})">› Important Dates</a></li>
+        <li><a href="#" onclick="showPage('home');document.getElementById('dates').scrollIntoView({behavior:'smooth'})">› Important Dates</a></li>
         <li><a href="#" onclick="showPage('advisory')">› Editors / PC Chairs</a></li>
         <li><a href="#" onclick="showPage('advisory')">› Advisory Board</a></li>
       </ul>
@@ -1281,7 +1294,7 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="#" onclick="showPage('home');document.getElementById('callforpapers').scrollIntoView({behavior:'smooth'})">› Call for Papers</a></li>
-        <li><a href="#" onclick="showPage('home');document.getElementById('registration-home').scrollIntoView({behavior:'smooth'})">› Registration Fees</a></li>
+        <li><a href="#" onclick="showPage('home');document.getElementById('registration-home').scrollIntoView({behavior:'smooth'})">› Registration Guidelines</a></li>
         <li><a href="#" onclick="showPage('registration')">› Online Registration</a></li>
         <li><a href="#" onclick="showPage('travel-guide')">› Travel Guide</a></li>
         <li><a href="#" onclick="showPage('reach-us')">› Reach Us</a></li>
