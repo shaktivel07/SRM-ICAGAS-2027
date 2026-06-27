@@ -156,63 +156,118 @@
     .org-band hr { width: 80px; border-top: 3px solid rgba(255,255,255,.7); margin: .25rem auto; }
     .org-band p { font-size: .95rem; line-height: 1.7; }
 
-    /* ─── ANIMATED CAMPUS PHOTO GALLERY ─── */
-    .campus-gallery-wrapper {
-      width: 100%;
-      background: #000;
+    /* ─── STACKED DECK PHOTO GALLERY ─── */
+    .campus-deck-section {
+      background: #050515;
+      padding: 4rem 1.5rem;
       overflow: hidden;
-      padding: 2.5rem 0;
+    }
+    .campus-deck-container {
       position: relative;
+      width: 100%;
+      max-width: 520px;
+      height: 360px;
+      margin: 0 auto;
+      perspective: 1200px;
+      user-select: none;
     }
-    .campus-gallery-wrapper::before,
-    .campus-gallery-wrapper::after {
-      content: "";
+    @media (max-width: 500px) {
+      .campus-deck-container {
+        height: 250px;
+      }
+    }
+    .deck-card {
       position: absolute;
-      top: 0;
-      width: 120px;
+      width: 100%;
       height: 100%;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .campus-gallery-wrapper::before {
       left: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.9), transparent);
-    }
-    .campus-gallery-wrapper::after {
-      right: 0;
-      background: linear-gradient(to left, rgba(0,0,0,0.9), transparent);
-    }
-    .campus-gallery-track {
-      display: flex;
-      width: max-content;
-      gap: 1.25rem;
-      animation: infiniteScroll 30s linear infinite;
-    }
-    .campus-gallery-wrapper:hover .campus-gallery-track {
-      animation-play-state: paused;
-    }
-    .campus-gallery-track img {
-      width: 320px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.3s ease, box-shadow 0.3s ease;
-      filter: brightness(0.8);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      top: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #111;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.6s ease;
       cursor: pointer;
     }
-    .campus-gallery-track img:hover {
-      transform: scale(1.06) translateY(-4px);
-      filter: brightness(1);
-      box-shadow: 0 12px 25px rgba(255, 197, 58, 0.3);
+    .deck-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    @keyframes infiniteScroll {
-      0% {
-        transform: translate3d(0, 0, 0);
-      }
-      100% {
-        transform: translate3d(calc(-5 * 320px - 5 * 1.25rem), 0, 0);
-      }
+    .deck-card-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 20%, transparent);
+      color: #fff;
+      padding: 1.5rem 1rem 1rem;
+      font-size: 0.85rem;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    /* Stack Card Positions styles */
+    .card-pos-0 {
+      transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      z-index: 10;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .card-pos-1 {
+      transform: translate3d(20px, -15px, -30px) scale(0.94) rotate(1deg);
+      z-index: 9;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+    .card-pos-2 {
+      transform: translate3d(40px, -30px, -60px) scale(0.88) rotate(2deg);
+      z-index: 8;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+    .card-pos-3 {
+      transform: translate3d(60px, -45px, -90px) scale(0.82) rotate(3deg);
+      z-index: 7;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    /* Slide out action logic */
+    .deck-card.slide-out {
+      transform: translate3d(130%, -25px, 80px) scale(0.9) rotate(15deg) !important;
+      opacity: 0 !important;
+      z-index: 11 !important;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease !important;
+    }
+    .deck-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .deck-control-btn {
+      background: linear-gradient(135deg, var(--navy2) 0%, var(--blue9) 100%);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .deck-control-btn:hover {
+      background: var(--pink);
+      box-shadow: 0 6px 20px rgba(242, 41, 91, 0.4);
+      transform: translateY(-2px);
+    }
+    .deck-control-btn:active {
+      transform: translateY(0);
     }
 
     /* ─── KEY DATES ─── */
@@ -274,7 +329,6 @@
     .reg-guidelines li { display: flex; align-items: flex-start; gap: .6rem; font-size: .93rem; line-height: 1.6; }
     .reg-tick { color: var(--blue9); font-weight: 700; font-size: 1.2rem; flex-shrink: 0; line-height: 1.3; }
     
-    /* THE BOX structure for registration table */
     .reg-table-wrap { overflow-x: auto; margin-top: 1.5rem; }
     .reg-table { width: 100%; border-collapse: collapse; min-width: 600px; font-size: .9rem; }
     .reg-table th { background: var(--gray-200); padding: .8rem 1rem; border: 1px solid var(--gray-300); text-align: left; font-weight: 600; }
@@ -534,12 +588,10 @@
     <div class="hero-content reveal" style="position: relative; z-index: 2;">
       <div class="hero-badge">Springer LNAI Series (Pending Approval)</div>
       
-      <!-- Title: Same font size on both lines, breaking exactly into 2 lines on desktop viewports -->
       <h1 style="font-size: clamp(1.4rem, 3.6vw, 2.5rem); font-weight: 700; font-family: var(--font-head); max-width: 950px; margin: 0 auto 1rem; line-height: 1.35; color: #fff;">
         International Conference on Agentic and Generative Artificial Intelligence <br class="desktop-only" />for Advanced Engineering Informatics and Autonomous Systems
       </h1>
       
-      <!-- SRMIST organization subtitle added immediately below the main title -->
       <p style="font-size: clamp(0.9rem, 1.8vw, 1.2rem); font-weight: 600; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
         Organized by SRM Institute of Science and Technology, Tiruchirappalli
       </p>
@@ -562,7 +614,6 @@
       </span>
     </div>
   </section>
-
 
   <!-- ABOUT CONFERENCE (HOME TEASER) -->
   <section class="section" id="about">
@@ -598,22 +649,43 @@
     </div>
   </div>
 
-  <!-- UPGRADED: Dynamic Infinite Smooth-Scrolling Campus Gallery -->
-  <div class="campus-gallery-wrapper">
-    <div class="campus-gallery-track">
-      <!-- Original Set -->
-      <img src="pic_4.JPG.jpeg" alt="SRM IST Tiruchirappalli Campus – Main Building" loading="lazy" onerror="this.src='https://placehold.co/600x400/0A075F/ffffff?text=SRM+Trichy+Campus'" />
-      <img src="pic_5.JPG.jpeg" alt="SRM IST Campus – Department Block" loading="lazy" onerror="this.src='https://placehold.co/600x400/002160/ffffff?text=SRM+Department+Block'" />
-      <img src="314A0112.JPG" alt="SRM IST Campus – Auditorium / Conference Hall" loading="lazy" onerror="this.src='https://placehold.co/600x400/f2295b/ffffff?text=SRM+Conference+Hall'" />
-      <img src="314A0023.JPG" alt="SRM IST Campus – Library" loading="lazy" onerror="this.src='https://placehold.co/600x400/db2777/ffffff?text=SRM+Library'" />
+  <!-- UPGRADED: Dynamic Interactive 3D Stacked Deck Campus Gallery -->
+  <section class="campus-deck-section">
+    <div class="section-center" style="text-align: center;">
+      <h2 class="section-title" style="color: #fff; margin-bottom: 0.5rem;">CAMPUS <span>GALLERY</span></h2>
+      <p style="font-size: 0.9rem; color: #a0aec0; margin-bottom: 2.5rem;">Click the top picture to cycle through the campus deck</p>
       
-      <!-- Duplicate Set for Seamless Infinite Loop -->
-      <img src="pic_4.JPG.jpeg" alt="SRM IST Tiruchirappalli Campus – Main Building" loading="lazy" onerror="this.src='https://placehold.co/600x400/0A075F/ffffff?text=SRM+Trichy+Campus'" />
-      <img src="pic_5.JPG.jpeg" alt="SRM IST Campus – Department Block" loading="lazy" onerror="this.src='https://placehold.co/600x400/002160/ffffff?text=SRM+Department+Block'" />
-      <img src="314A0112.JPG" alt="SRM IST Campus – Auditorium / Conference Hall" loading="lazy" onerror="this.src='https://placehold.co/600x400/f2295b/ffffff?text=SRM+Conference+Hall'" />
-      <img src="314A0023.JPG" alt="SRM IST Campus – Library" loading="lazy" onerror="this.src='https://placehold.co/600x400/db2777/ffffff?text=SRM+Library'" />
+      <div class="campus-deck-container" id="campus-deck">
+        <!-- Deck Cards (Auto class positions assigned in Javascript below) -->
+        <div class="deck-card" onclick="cycleDeck()">
+          <img src="pic_4.JPG.jpeg" alt="SRM IST Tiruchirappalli Campus – Main Building" onerror="this.src='https://placehold.co/600x400/0A075F/ffffff?text=SRM+Trichy+Campus'" />
+          <div class="deck-card-caption">SRM IST Tiruchirappalli Campus – Main Building</div>
+        </div>
+        <div class="deck-card" onclick="cycleDeck()">
+          <img src="pic_5.JPG.jpeg" alt="SRM IST Campus – Department Block" onerror="this.src='https://placehold.co/600x400/002160/ffffff?text=SRM+Department+Block'" />
+          <div class="deck-card-caption">SRM IST Campus – Department Block</div>
+        </div>
+        <div class="deck-card" onclick="cycleDeck()">
+          <img src="314A0112.JPG" alt="SRM IST Campus – Auditorium / Conference Hall" onerror="this.src='https://placehold.co/600x400/f2295b/ffffff?text=SRM+Conference+Hall'" />
+          <div class="deck-card-caption">SRM IST Campus – Auditorium / Conference Hall</div>
+        </div>
+        <div class="deck-card" onclick="cycleDeck()">
+          <img src="314A0023.JPG" alt="SRM IST Campus – Library" onerror="this.src='https://placehold.co/600x400/db2777/ffffff?text=SRM+Library'" />
+          <div class="deck-card-caption">SRM IST Campus – Central Library</div>
+        </div>
+      </div>
+      
+      <!-- Manual Control Arrows -->
+      <div class="deck-controls">
+        <button class="deck-control-btn" onclick="prevDeck()" aria-label="Previous Slide">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button class="deck-control-btn" onclick="nextDeck()" aria-label="Next Slide">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- KEY DATES -->
   <section class="section" id="dates">
@@ -623,7 +695,7 @@
         KEY <span>&nbsp;DATES</span>
       </h2>
       <div class="dates-list reveal">
-        <div class="date-item"><span class="date-num">1</span><p>Paper Submission Deadline: <strong>1st August 2026</strong></p></div>
+        <div class="date-item"><span class="date-num">1</span><p>Paper Submission Deadline: <strong>1st October 2026</strong></p></div>
         <div class="date-item"><span class="date-num">2</span><p>Acceptance Notification: <strong>1st December 2026</strong></p></div>
         <div class="date-item"><span class="date-num">3</span><p>Deadline for Final (Camera-Ready) Papers: <strong>20th December 2026</strong></p></div>
         <div class="date-item"><span class="date-num">4</span><p>Camera-Ready Delivery to Springer: <strong>19th February 2027</strong></p></div>
@@ -778,7 +850,6 @@
           <li><span class="reg-tick">✓</span>Other authors may register as co-authors if one author has already registered in the author category.</li>
         </ul>
         
-        <!-- RESTORED: Table "Box" Structure with TBA placeholders inside the columns -->
         <div class="reg-table-wrap" style="margin-top: 2rem;">
           <table class="reg-table">
             <thead>
@@ -917,7 +988,6 @@
         <li><span class="reg-tick">✓</span>Other authors may register as co-authors if at least one author has already registered in the author category.</li>
       </ul>
 
-      <!-- RESTORED: Table "Box" structure for fee schedule on the inner registration page -->
       <h3>Per-Person Registration Fee Structure</h3>
       <div class="reg-table-wrap">
         <table class="reg-table">
@@ -1021,20 +1091,119 @@
           <div class="board-card"><p class="board-name">Dr. Atma Sahu</p><p class="board-uni">Coppin State University</p><p class="board-country">USA</p></div>
           <div class="board-card"><p class="board-name">Prof. Chin-Shiuh Shieh</p><p class="board-uni">National Kaohsiung University of Science and Technology</p><p class="board-country">Taiwan</p></div>
           <div class="board-card"><p class="board-name">Dr. Wai-Keung Fung</p><p class="board-uni">Cardiff Metropolitan University</p><p class="board-country">United Kingdom</p></div>
+          
+          <!-- Newly Added International Advisory Board Members -->
+          <div class="board-card"><p class="board-name">George A. Tsihrintzis</p><p class="board-uni">University of Piraeus</p><p class="board-country">Greece</p></div>
+          <div class="board-card"><p class="board-name">Dijana Oreski</p><p class="board-uni">University of Zagreb, Varazdin</p><p class="board-country">Croatia</p></div>
+          <div class="board-card"><p class="board-name">Nuno M. Garcia</p><p class="board-uni">University of Beira Interior</p><p class="board-country">Portugal</p></div>
+          <div class="board-card"><p class="board-name">Jaafar Alghazo</p><p class="board-uni">Virginia Military Institute</p><p class="board-country">USA</p></div>
+          <div class="board-card"><p class="board-name">Prajoy Podder</p><p class="board-uni">Institute of ICT, BUET, Dhaka</p><p class="board-country">Bangladesh</p></div>
+          <div class="board-card"><p class="board-name">M. Rubaiyat Hossain Mondal</p><p class="board-uni">Institute of ICT, BUET, Dhaka</p><p class="board-country">Bangladesh</p></div>
+          <div class="board-card"><p class="board-name">Daniel Nogueira</p><p class="board-uni">University of Minho</p><p class="board-country">Brazil</p></div>
+          <div class="board-card"><p class="board-name">Khan Muhammad</p><p class="board-uni">Sejong University</p><p class="board-country">South Korea</p></div>
+          <div class="board-card"><p class="board-name">Alireza Jolfaei</p><p class="board-uni">Macquarie University</p><p class="board-country">Australia</p></div>
+          <div class="board-card"><p class="board-name">Flah Aymen</p><p class="board-uni">National School of Engineering of Gabes</p><p class="board-country">Tunisia</p></div>
+          <div class="board-card"><p class="board-name">Placido Rogerio Pinheiro</p><p class="board-uni">University of Fortaleza</p><p class="board-country">Brazil</p></div>
+          <div class="board-card"><p class="board-name">Daniela Clara Moraru</p><p class="board-uni">University of Luxembourg</p><p class="board-country">Luxembourg</p></div>
+          <div class="board-card"><p class="board-name">Vassilis C. Gerogiannis</p><p class="board-uni">University of Thessaly</p><p class="board-country">Greece</p></div>
         </div>
       </div>
 
       <div id="tab-national" class="tab-panel">
         <div class="board-grid reveal">
-          <div class="board-card"><p class="board-name">Dr. Kanaga Suba Raja S</p><p class="board-uni">SRMIST Tiruchirappalli</p><p class="board-country">India</p></div>
-          <div class="board-card"><p class="board-name">To Be Announced</p><p class="board-uni">National Board Members</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. S. Thamarai Selvi</p><p class="board-uni">Thiruvalluvar University, Vellore</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. P. Yogesh</p><p class="board-uni">Anna University, Chennai</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. R N Kulkarni</p><p class="board-uni">Ballari Institute of Technology &amp; Management, Ballari</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. A. Amuthan</p><p class="board-uni">Puducherry Technological University, Puducherry</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. S. Mary Saira Bhanu</p><p class="board-uni">National Institute of Technology, Tiruchirappalli</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. R. Rajesh</p><p class="board-uni">Central University of Kerala, Kerala</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. R. Baskaran</p><p class="board-uni">Anna University, Chennai</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. PJA Alphonse</p><p class="board-uni">National Institute of Technology, Tiruchirappalli</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. R. S. Bhuvaneswaran</p><p class="board-uni">Anna University, Chennai</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. R. Dhanalakshmi</p><p class="board-uni">IIIT, Tiruchirappalli</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. R. Bala venkata Subramanyam</p><p class="board-uni">National Institute of Technology, Warangal</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. Pandiri Venkatesh</p><p class="board-uni">IIITDM Kancheepuram, Chennai</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. C. Valliamma</p><p class="board-uni">Anna University, Chennai</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. Ponsy. R. K. Sathiyabama</p><p class="board-uni">Anna University, Chennai</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. V. Akila</p><p class="board-uni">Puducherry Technological University, Puducherry</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. S.Janakiraman</p><p class="board-uni">Pondicherry University, Pondicherry</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. J. Arul Valan</p><p class="board-uni">National Institute of Technology, Nagaland</p><p class="board-country">India</p></div>
+          <div class="board-card"><p class="board-name">Dr. K. Kathiravan</p><p class="board-uni">SRM Group of Institutions, Ramapuram Campus, Chennai</p><p class="board-country">India</p></div>
         </div>
       </div>
 
       <div id="tab-organizing" class="tab-panel">
         <div class="board-grid reveal">
-          <div class="board-card"><p class="board-name">Dr. Kanaga Suba Raja S</p><p class="board-uni">General Chair / HoD – CSE</p><p class="board-country">SRMIST Tiruchirappalli</p></div>
-          <div class="board-card"><p class="board-name">Organizing Team</p><p class="board-uni">Dept. of Computer Science and Engineering</p><p class="board-country">SRMIST Tiruchirappalli</p></div>
+          <div class="board-card" style="border: 2px dashed var(--pink); grid-column: 1 / -1;">
+            <p class="board-name" style="font-size: 1.1rem; text-align: center;">Dr. Kanaga Suba Raja S</p>
+            <p class="board-uni" style="text-align: center; font-weight: 600; color: var(--navy);">General Chair / HoD – CSE</p>
+            <p class="board-country" style="text-align: center;">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Mrs. R. Sharanya</p>
+            <p class="board-uni">B.E., M.E., (Ph.D) — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. V. Senthil Kumar</p>
+            <p class="board-uni">B.E., M.E., Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. P. Shanmuga Sundari</p>
+            <p class="board-uni">B.Sc., M.C.A., M.E., Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. S. Anbukkarasi</p>
+            <p class="board-uni">B.Tech., M.E., MBA, Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. D. Chitradevi</p>
+            <p class="board-uni">M.E., Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. K. Jayanthi</p>
+            <p class="board-uni">B.Tech., M.Tech., Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. N. Saranya</p>
+            <p class="board-uni">B.E., M.E., Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Mr. J. Paul Raja Singh</p>
+            <p class="board-uni">B.E., M.E., (Ph.D) — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. M. Devipriya</p>
+            <p class="board-uni">B.E., M.S (By Research)., Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card" style="border-left: 4px solid var(--pink);">
+            <p class="board-name">Dr. R. Deebalakshmi</p>
+            <p class="board-uni">B.E., M.E., Ph.D — Assistant Professor &amp; HoD Cyber Security</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. K. R. Saranya</p>
+            <p class="board-uni">B.E., M.E., Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. S. Sivakumar</p>
+            <p class="board-uni">B.E., M.E., Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
+          <div class="board-card">
+            <p class="board-name">Dr. L. Josephine Usha</p>
+            <p class="board-uni">B.E., M.E., Ph.D — Assistant Professor</p>
+            <p class="board-country">SRMIST Tiruchirappalli</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1083,7 +1252,7 @@
         </div>
       </div>
 
-      <!-- Grid 1: Primary Places to Visit (No Pics - High Aesthetic Typography) -->
+      <!-- Grid 1: Primary Places to Visit -->
       <h2 class="section-title">PRIMARY <span>PLACES TO VISIT</span></h2>
       <div class="travel-places-grid reveal" style="margin-bottom: 4rem;">
         
@@ -1145,7 +1314,7 @@
 
       </div>
 
-      <!-- Grid 2: Tourist Attractions (No Pics) -->
+      <!-- Grid 2: Tourist Attractions -->
       <h2 class="section-title">SCENIC &amp; <span>TOURIST ATTRACTIONS</span></h2>
       <div class="travel-places-grid reveal" style="margin-bottom: 4rem;">
         
@@ -1277,7 +1446,7 @@
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div>
-    <img src="logo_1.png" alt="SRM IST Logo" style="width: 150px; height: auto;" title="SRM Institute of Science and Technology" />
+    <img src="logo_1.png" alt="SRM IST Logo" style="width: 150px; height: auto; margin-top: 2rem;" title="SRM Institute of Science and Technology" />
   </div>
 
   <div class="footer-inner">
@@ -1348,6 +1517,71 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ─── INTERACTIVE DECK ROTATION LOGIC ─── */
+  let deckIndex = 0;
+  const deckCards = document.querySelectorAll('.deck-card');
+  const totalDeckCards = deckCards.length;
+  let deckAutoplay;
+
+  function updateDeckStyles() {
+    deckCards.forEach((card, i) => {
+      // Calculate relative position inside the stack based on active index
+      let pos = (i - deckIndex + totalDeckCards) % totalDeckCards;
+      
+      // Clean and assign position classes
+      card.className = 'deck-card';
+      card.classList.add(`card-pos-${pos}`);
+    });
+  }
+
+  function nextDeck() {
+    const activeCard = document.querySelector('.deck-card.card-pos-0');
+    if (activeCard) {
+      activeCard.classList.add('slide-out');
+      // Delay state update slightly to let slide-out transition complete
+      setTimeout(() => {
+        deckIndex = (deckIndex + 1) % totalDeckCards;
+        updateDeckStyles();
+      }, 350);
+    } else {
+      deckIndex = (deckIndex + 1) % totalDeckCards;
+      updateDeckStyles();
+    }
+  }
+
+  function prevDeck() {
+    // Reverse cycle logic
+    deckIndex = (deckIndex - 1 + totalDeckCards) % totalDeckCards;
+    updateDeckStyles();
+  }
+
+  function cycleDeck() {
+    // Trigger slide transition on card click
+    nextDeck();
+    resetDeckAutoplay();
+  }
+
+  function startDeckAutoplay() {
+    deckAutoplay = setInterval(nextDeck, 4000);
+  }
+
+  function resetDeckAutoplay() {
+    clearInterval(deckAutoplay);
+    startDeckAutoplay();
+  }
+
+  // Initialize and assign Hover triggers
+  window.onload = function() {
+    updateDeckStyles();
+    startDeckAutoplay();
+
+    const deckElement = document.getElementById('campus-deck');
+    if (deckElement) {
+      deckElement.addEventListener('mouseenter', () => clearInterval(deckAutoplay));
+      deckElement.addEventListener('mouseleave', startDeckAutoplay);
+    }
+  }
 </script>
 </body>
 </html>
