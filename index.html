@@ -794,11 +794,13 @@
 <!-- ═══════════════════════════════════════════ -->
 <div id="about-page" class="page-section">
   <div style="height:4.5rem;"></div>
-  <div style="position:relative; min-height:35vh; overflow:hidden;">
+  <!-- Increased min-height to 52.5vh (150% of 35vh) -->
+  <div style="position:relative; min-height:52.5vh; overflow:hidden;">
     <img src="pic_5.JPG.jpeg" alt="SRM IST Tiruchirappalli Campus"
-         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.45);"
+         style="position:absolute;inset:0;width:100%;height:150%;object-fit:cover;filter:brightness(.45);"
          onerror="this.src='https://placehold.co/1200x600/0A075F/ffffff?text=SRM+IST+Tiruchirappalli+Campus'" />
-    <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:35vh;
+    <!-- Increased min-height here too so the background gradient matches the container -->
+    <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:52.5vh;
                 background:linear-gradient(112deg,rgba(0,33,96,.75) 28%,rgba(242,41,91,.6) 100%);">
       <div style="text-align:center; color:#fff; padding:2rem 1.5rem;">
         <h1 style="font-size:clamp(1.4rem,4vw,2.5rem); font-weight:700; font-family:var(--font-head);">About ICAGAS 2027</h1>
@@ -806,6 +808,8 @@
       </div>
     </div>
   </div>
+</div>
+
 
   <div class="about-detail-content">
     <h2>About ICAGAS 2027</h2>
@@ -860,10 +864,22 @@
 <!-- ═══════════════════════════════════════════ -->
 <div id="registration" class="page-section">
   <div style="height:4.5rem;"></div>
-  <div style="background: linear-gradient(112deg, var(--navy2) 28%, var(--pink) 100%); min-height:25vh; display:flex; align-items:center; justify-content:center;">
-    <div style="text-align:center; color:#fff; padding:2rem 1.5rem;">
-      <h1 style="font-size:clamp(1.4rem,4vw,2.5rem); font-weight:700; font-family:var(--font-head);">Registration</h1>
-      <p style="margin-top:.75rem; font-size:1rem; opacity:.85;">ICAGAS 2027 · 12–13 February 2027</p>
+  
+  <!-- Outer wrapper with increased min-height (150% of 25vh is 37.5vh) and hidden overflow -->
+  <div style="position:relative; min-height:37.5vh; overflow:hidden;">
+    
+    <!-- Background Image with brightness filter -->
+    <img src="cse.png" alt="Registration Background"
+         style="position:absolute;inset:0;width:100%;height:150%;object-fit:cover;filter:brightness(.45);"
+         onerror="this.src='https://placehold.co'" />
+         
+    <!-- Inner flex container with matching min-height and your original variable gradient -->
+    <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:37.5vh;
+                background:linear-gradient(112deg, var(--navy2) 28%, var(--pink) 100%);">
+      <div style="text-align:center; color:#fff; padding:2rem 1.5rem;">
+        <h1 style="font-size:clamp(1.4rem,4vw,2.5rem); font-weight:700; font-family:var(--font-head);">Registration</h1>
+        <p style="margin-top:.75rem; font-size:1rem; opacity:.85;">ICAGAS 2027 · 12–13 February 2027</p>
+      </div>
     </div>
   </div>
   <section class="section">
